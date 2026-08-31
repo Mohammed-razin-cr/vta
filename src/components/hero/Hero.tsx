@@ -67,7 +67,10 @@ export function Hero() {
 
         <div className="min-w-0 lg:justify-self-end">
           <HeroVisualMotion className="relative w-full">
-            <div className="relative mx-auto aspect-[4/3] w-[calc(100%-50px)] max-w-[670px]">
+            <div
+              className="relative mx-auto aspect-[4/3] w-[calc(100%-50px)] max-w-[670px]"
+              style={{ aspectRatio: "4 / 3", width: "calc(100% - 50px)", maxWidth: "670px" }}
+            >
               <TalentCloudDiagram />
             </div>
           </HeroVisualMotion>

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 
 const INTRO_VIDEO = "/assets/aura-farm.mp4";
 const CONTINUOUS_VIDEO = "/assets/aura-farm2.mp4";
@@ -49,36 +48,54 @@ export function TalentCloudDiagram() {
 
   return (
     <div
-      className="relative h-full w-full overflow-hidden"
+      className="relative h-full w-full overflow-hidden bg-paper"
+      aria-busy={!videoReady}
       style={{
+        position: "relative",
+        height: "100%",
+        width: "100%",
+        overflow: "hidden",
+        backgroundColor: "var(--paper)",
         WebkitMaskImage:
           "radial-gradient(ellipse 72% 66% at 50% 52%, #000 42%, rgba(0,0,0,.9) 58%, transparent 92%)",
         maskImage:
           "radial-gradient(ellipse 72% 66% at 50% 52%, #000 42%, rgba(0,0,0,.9) 58%, transparent 92%)",
       }}
     >
-      <Image
-        src="/assets/talent-cloud-poster.webp"
-        alt=""
-        fill
-        priority
-        sizes="(max-width: 1023px) 90vw, 50vw"
+      <div
         aria-hidden="true"
-        className={`object-cover transition-opacity duration-300 ${videoReady ? "opacity-0" : "opacity-100"}`}
+        className="absolute inset-0 transition-opacity duration-300"
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "radial-gradient(ellipse at 50% 52%, rgba(255,255,255,.72), color-mix(in srgb, var(--paper) 94%, transparent) 58%, var(--paper) 82%)",
+          opacity: videoReady ? 0 : 1,
+        }}
       />
       <video
         ref={videoRef}
-        className={`relative h-full w-full -translate-y-3 scale-[1.21] object-cover mix-blend-multiply transition-opacity duration-300 [filter:brightness(1.16)_contrast(1.2)_saturate(1.08)] ${videoReady ? "opacity-100" : "opacity-0"}`}
+        className="absolute inset-0 h-full w-full object-cover mix-blend-multiply transition-opacity duration-300"
+        style={{
+          position: "absolute",
+          inset: 0,
+          height: "100%",
+          width: "100%",
+          objectFit: "cover",
+          opacity: videoReady ? 1 : 0,
+          visibility: videoReady ? "visible" : "hidden",
+          transform: "translateY(-0.75rem) scale(1.21)",
+          filter: "brightness(1.16) contrast(1.2) saturate(1.08)",
+        }}
         src={videoSource}
         autoPlay
         loop={isContinuousVideo}
         muted
         playsInline
         preload="auto"
-        poster="/assets/talent-cloud-poster.webp"
-        onLoadedData={() => setVideoReady(true)}
+        onPlaying={() => setVideoReady(true)}
+        onError={() => setVideoReady(false)}
         onEnded={() => {
-          setVideoReady(false);
           setVideoSource(CONTINUOUS_VIDEO);
         }}
         aria-label="VOC Technical Academy automotive technology showcase"
