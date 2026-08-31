@@ -129,18 +129,9 @@ export function AudiencePathway() {
                 <span aria-hidden="true" className="absolute inset-[4px] rounded-full border border-white/80" />
                 <div className="relative h-full w-full overflow-hidden rounded-full border border-ink/35 bg-white p-1 sm:p-1">
                   <div className="relative h-full w-full overflow-hidden rounded-full bg-paper-deep">
-                    <video
-                      src={audience.video}
-                      poster={audience.image}
-                      aria-hidden="true"
-                      tabIndex={-1}
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      preload="auto"
-                      disablePictureInPicture
-                      controlsList="nodownload noplaybackrate"
+                    <img
+                      src={audience.image}
+                      alt={audience.title}
                       className="absolute inset-0 h-full w-full object-cover"
                     />
                   </div>
