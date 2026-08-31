@@ -8,7 +8,7 @@ const AUDIENCES = [
     title: "Learners",
     detail: "Learn & upskill",
     image: "/assets/avatar-learner.jpg",
-    video: "/assets/videos/learners..mp4",
+    video: "/assets/videos/learners-bg.mp4",
   },
   {
     index: "02",

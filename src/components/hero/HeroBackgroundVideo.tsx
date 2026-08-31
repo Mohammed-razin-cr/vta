@@ -2,10 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const SHOW_HERO_BG_VIDEO = false;
+const SHOW_HERO_BG_VIDEO = true;
 
 const HERO_BG_VIDEOS = [
-  "/assets/videos/learners..mp4",
+  "/assets/videos/learners-bg.mp4",
 ];
 
 export function HeroBackgroundVideo() {
