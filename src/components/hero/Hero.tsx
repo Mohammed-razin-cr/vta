@@ -5,11 +5,13 @@ import { TalentCloudDiagram } from "@/components/landing/Hero/TalentCloudDiagram
 import { HeroHeadline } from "./HeroHeadline";
 import { HeroVisualMotion } from "./HeroVisualMotion";
 import { AudiencePathway } from "./AudiencePathway";
+import { HeroBackgroundVideo } from "./HeroBackgroundVideo";
 
 export function Hero() {
   return (
-    <section className="relative bg-paper pb-14 pt-10 md:pb-20 md:pt-16 lg:min-h-[calc(100vh-76px)] lg:py-16">
-      <div className="relative mx-auto grid w-full max-w-[1640px] items-center gap-x-12 gap-y-12 px-5 md:px-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-x-14 xl:gap-x-20 xl:px-10 2xl:px-12">
+    <section className="relative overflow-hidden bg-paper pb-14 pt-10 md:pb-20 md:pt-16 lg:min-h-[calc(100vh-76px)] lg:py-16">
+      <HeroBackgroundVideo />
+      <div className="relative z-10 mx-auto grid w-full max-w-[1640px] items-center gap-x-12 gap-y-12 px-5 md:px-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-x-14 xl:gap-x-20 xl:px-10 2xl:px-12">
         <div className="max-w-3xl">
           <Reveal standalone>
             <div className="flex items-center gap-3 max-[299px]:gap-0 sm:gap-4">
