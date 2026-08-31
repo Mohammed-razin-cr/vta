@@ -8,28 +8,28 @@ const AUDIENCES = [
     title: "Learners",
     detail: "Learn & upskill",
     image: "/assets/avatar-learner.jpg",
-    video: "/assets/videos/Create_an_ultra_photorealistic.mp4",
+    video: "/assets/videos/learners..mp4",
   },
   {
     index: "02",
     title: "Trainers",
     detail: "Teach & empower",
     image: "/assets/avatar-trainer.jpg",
-    video: "/assets/videos/Enhanced_Cinematic_Video_Promp.mp4",
+    video: "/assets/videos/talent-cloud-trainers.mp4",
   },
   {
     index: "03",
     title: "Employers",
     detail: "Hire & grow",
     image: "/assets/avatar-employer.jpg",
-    video: "/assets/videos/Enhanced_Standalone_Video_Prom.mp4",
+    video: "/assets/videos/talent-cloud-employers.mp4",
   },
   {
     index: "04",
     title: "Partners",
     detail: "Impact & enable",
     image: "/assets/card-partners.png",
-    video: "/assets/videos/Create_an_ultra_photorealistic (1).mp4",
+    video: "/assets/videos/talent-cloud-partners.mp4",
   },
 ] as const;
 

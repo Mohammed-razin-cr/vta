@@ -5,9 +5,7 @@ import { useEffect, useRef, useState } from "react";
 const SHOW_HERO_BG_VIDEO = false;
 
 const HERO_BG_VIDEOS = [
-  "/assets/videos/Enhanced_Cinematic_Video_Promp.mp4",
-  "/assets/videos/Create_an_ultra_photorealistic.mp4",
-  "/assets/videos/Enhanced_Standalone_Video_Prom.mp4",
+  "/assets/videos/learners..mp4",
 ];
 
 export function HeroBackgroundVideo() {
