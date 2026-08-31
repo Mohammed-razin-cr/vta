@@ -39,9 +39,6 @@ function TestimonialCard({
         </div>
 
         <div className="min-w-0">
-          <p className="font-display text-[1.35rem] font-bold leading-tight tracking-[-0.025em] text-ink sm:text-[1.7rem]">
-            {testimonial.name}
-          </p>
           <svg
             aria-hidden="true"
             viewBox="0 0 150 22"
