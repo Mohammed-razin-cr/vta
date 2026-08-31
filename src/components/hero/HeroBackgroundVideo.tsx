@@ -58,16 +58,15 @@ export function HeroBackgroundVideo() {
           setCurrentVideoIndex((prev) => (prev + 1) % HERO_BG_VIDEOS.length);
         }}
         className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
-          isLoaded ? "opacity-25" : "opacity-0"
+          isLoaded ? "opacity-75 md:opacity-85" : "opacity-0"
         }`}
         style={{
-          filter: "brightness(0.9) contrast(1.1) saturate(0.95)",
-          mixBlendMode: "multiply",
+          filter: "brightness(0.95) contrast(1.08) saturate(1.05)",
         }}
       />
-      {/* Editorial Gradients to guarantee 100% text legibility */}
-      <div className="absolute inset-0 bg-gradient-to-r from-paper via-paper/90 to-paper/50" />
-      <div className="absolute inset-0 bg-gradient-to-b from-paper/60 via-transparent to-paper" />
+      {/* Subtle translucent overlays ensuring high video visibility + text readability */}
+      <div className="absolute inset-0 bg-gradient-to-r from-paper/90 via-paper/60 to-paper/20" />
+      <div className="absolute inset-0 bg-gradient-to-b from-paper/40 via-transparent to-paper/90" />
     </div>
   );
 }
