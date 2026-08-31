@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const SHOW_HERO_BG_VIDEO = true;
+const SHOW_HERO_BG_VIDEO = false;
 
 const HERO_BG_VIDEOS = [
   "/assets/videos/learners-bg.mp4",
