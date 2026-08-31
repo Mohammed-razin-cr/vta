@@ -57,7 +57,7 @@ export function HeroHeadline() {
   return (
     <h1
       ref={rootRef}
-      className="mt-6 font-display text-[clamp(2.2rem,12.75vw,2.9rem)] font-extrabold leading-[0.98] tracking-[-0.03em] text-ink sm:text-display-xl lg:text-[clamp(3.35rem,5.15vw,5.6rem)]"
+      className="mt-6 font-display text-[clamp(1.75rem,11vw,2.9rem)] font-extrabold leading-[0.98] tracking-[-0.03em] text-ink sm:text-display-xl lg:text-[clamp(3.35rem,5.15vw,5.6rem)]"
     >
       <span className="sr-only">Real machines. Real skills. Real careers.</span>
       <span aria-hidden="true" className="block">

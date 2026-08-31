@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const INTRO_VIDEO = "/assets/aura-farm.mp4";
@@ -62,15 +63,18 @@ export function TalentCloudDiagram() {
           "radial-gradient(ellipse 72% 66% at 50% 52%, #000 42%, rgba(0,0,0,.9) 58%, transparent 92%)",
       }}
     >
-      <div
+      <Image
+        src="/assets/talent-cloud-poster.webp"
+        alt=""
         aria-hidden="true"
-        className="absolute inset-0 transition-opacity duration-300"
+        fill
+        priority
+        sizes="(max-width: 1023px) calc(100vw - 90px), 670px"
+        className="object-cover mix-blend-multiply transition-opacity duration-300"
         style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(ellipse at 50% 52%, rgba(255,255,255,.72), color-mix(in srgb, var(--paper) 94%, transparent) 58%, var(--paper) 82%)",
           opacity: videoReady ? 0 : 1,
+          transform: "translateY(-0.75rem) scale(1.21)",
+          filter: "brightness(1.12) contrast(1.14) saturate(1.04)",
         }}
       />
       <video
