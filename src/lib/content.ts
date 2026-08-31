@@ -129,8 +129,8 @@ export const COURSE_LEVELS = [
     format: "Workshop-first",
     practice: "Engine systems",
     cta: { label: "Enquire now", href: "#contact" },
-    image: "/assets/vta-engine-image.webp",
-    imageAlt: "VOC Technical Academy engine training area with workshop equipment",
+    image: "/assets/silver-course-engine-workshop.webp",
+    imageAlt: "VTA Silver Level learner servicing a motorcycle engine in the workshop",
     enrolmentDetails: [
       { label: "Entry guidance", value: "Speak with admissions" },
       { label: "Fee details", value: "Request current quote" },
@@ -162,8 +162,8 @@ export const COURSE_LEVELS = [
     format: "Workshop-first",
     practice: "Diagnostic tools",
     cta: { label: "Enquire now", href: "#contact" },
-    image: "/assets/vta-technicalarea.webp",
-    imageAlt: "VOC Technical Academy technical training area for advanced diagnostics",
+    image: "/assets/gold-course-diagnostics-workshop.webp",
+    imageAlt: "VTA Gold Level learner performing live motorcycle diagnostics with a scan tool",
     enrolmentDetails: [
       { label: "Entry guidance", value: "Speak with admissions" },
       { label: "Fee details", value: "Request current quote" },
