@@ -14,6 +14,7 @@ export function Navbar() {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const mobilePanelRef = useRef<HTMLElement>(null);
+  const restoreMenuFocusRef = useRef(true);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -47,6 +48,7 @@ export function Navbar() {
     document.body.style.overflow = "hidden";
     main?.setAttribute("inert", "");
     header?.setAttribute("inert", "");
+    restoreMenuFocusRef.current = true;
     closeButtonRef.current?.focus();
 
     const onKeyDown = (event: KeyboardEvent) => {
@@ -79,11 +81,21 @@ export function Navbar() {
       main?.removeAttribute("inert");
       header?.removeAttribute("inert");
       document.removeEventListener("keydown", onKeyDown);
-      menuButtonRef.current?.focus();
+      if (restoreMenuFocusRef.current) menuButtonRef.current?.focus();
+      restoreMenuFocusRef.current = true;
     };
   }, [mobileOpen]);
 
-  const closeMenu = () => setMobileOpen(false);
+  const closeMenu = (restoreFocus = true) => {
+    // Release the page before a mobile anchor performs its native scroll.
+    // Waiting for the effect cleanup can leave the body locked for that frame,
+    // which updates the hash without moving to the requested section.
+    document.body.style.overflow = "";
+    document.getElementById("main")?.removeAttribute("inert");
+    document.querySelector<HTMLElement>("[data-site-header]")?.removeAttribute("inert");
+    restoreMenuFocusRef.current = restoreFocus;
+    setMobileOpen(false);
+  };
 
   return (
     <>
@@ -181,7 +193,7 @@ export function Navbar() {
 
       <div
         aria-hidden="true"
-        onClick={closeMenu}
+        onClick={() => closeMenu()}
         className={cn(
           "fixed inset-0 z-[55] bg-ink/60 transition-opacity duration-300 min-[1180px]:hidden",
           mobileOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
@@ -202,7 +214,7 @@ export function Navbar() {
           <button
             ref={closeButtonRef}
             type="button"
-            onClick={closeMenu}
+            onClick={() => closeMenu()}
             aria-label="Close navigation"
             className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-btn border border-line-strong text-ink transition-colors hover:bg-ink hover:text-paper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember"
           >
@@ -215,7 +227,7 @@ export function Navbar() {
             <a
               key={item.href}
               href={item.href}
-              onClick={closeMenu}
+              onClick={() => closeMenu(false)}
               tabIndex={mobileOpen ? 0 : -1}
               className="group flex min-h-12 items-center justify-between border-b border-line py-3 font-display text-xl font-bold text-ink focus-visible:outline-none focus-visible:text-ember"
             >
@@ -230,7 +242,7 @@ export function Navbar() {
         <div className="grid gap-2 border-t border-line pt-5 sm:grid-cols-2">
           <Link
             href={ROUTES.login}
-            onClick={closeMenu}
+            onClick={() => closeMenu(false)}
             tabIndex={mobileOpen ? 0 : -1}
             className="inline-flex h-12 items-center justify-center rounded-btn border border-line-strong font-semibold text-ink"
           >
@@ -238,7 +250,7 @@ export function Navbar() {
           </Link>
           <Link
             href={ROUTES.register}
-            onClick={closeMenu}
+            onClick={() => closeMenu(false)}
             tabIndex={mobileOpen ? 0 : -1}
             className="inline-flex h-12 items-center justify-center rounded-btn bg-ember font-semibold text-white"
           >
