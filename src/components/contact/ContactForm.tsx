@@ -15,7 +15,7 @@ type ContactFormProps = {
 type FormErrors = Partial<Record<"name" | "phone" | "audience" | "consent", string>>;
 
 const fieldBase =
-  "min-h-12 w-full rounded-btn border px-3.5 text-base outline-none transition-colors placeholder:text-smoke-light focus:border-ember focus:ring-2 focus:ring-ember/20";
+  "min-h-12 w-full rounded-btn border px-3.5 text-base transition-colors placeholder:text-smoke-light focus-visible:border-ember focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember/20";
 
 export function ContactForm({
   defaultAudience = "Learner",
@@ -150,6 +150,9 @@ export function ContactForm({
           <span className="text-sm font-semibold">What are you interested in?</span>
           <select name="interest" defaultValue="Bronze Level Course" className={cn("vta-contact-select mt-2", field)}>
             <option>Bronze Level Course</option>
+            <option>Silver Level Course</option>
+            <option>Gold Level Course</option>
+            <option>Platinum Level Course</option>
             <option>Technical training</option>
             <option>Hiring certified talent</option>
             <option>Trainer opportunities</option>

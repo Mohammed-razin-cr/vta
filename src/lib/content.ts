@@ -84,33 +84,142 @@ export const TRAINING_TRACKS = [
   },
 ] as const;
 
-export const BRONZE_COURSE = {
-  kicker: "Flagship foundation course",
-  title: "Bronze Level Course",
-  duration: "120 hours",
-  cta: { label: "Enroll now", href: "#contact" },
-  image: "/assets/bronze-course-workshop.jpg",
-  imageAlt: "Motorcycle mechanic carrying out hands-on service work inside a real workshop",
-  enrolmentDetails: [
-    { label: "Next batch", value: "Ask admissions" },
-    { label: "Fee details", value: "Request current quote" },
-    { label: "Career outcome", value: "Job assurance at VOC centres" },
-  ],
-  modules: [
-    {
-      title: "Tools & Equipment",
-      description: "Identification and safe use of general-purpose workshop tools.",
-    },
-    {
-      title: "Workshop Equipment",
-      description: "Usage, maintenance and safety practices across core service equipment.",
-    },
-    {
-      title: "Measuring Instruments",
-      description: "Practical application of special tools, installers, pullers and measuring equipment.",
-    },
-  ],
-} as const;
+export const COURSE_LEVELS = [
+  {
+    id: "bronze",
+    index: "01",
+    shortTitle: "Bronze",
+    kicker: "Flagship foundation course",
+    title: "Bronze Level Course",
+    stage: "Foundation",
+    duration: "120 hours",
+    format: "Workshop-first",
+    practice: "Live machines",
+    cta: { label: "Enroll now", href: "#contact" },
+    image: "/assets/bronze-course-workshop.jpg",
+    imageAlt: "Motorcycle mechanic carrying out hands-on service work inside a real workshop",
+    enrolmentDetails: [
+      { label: "Next batch", value: "Ask admissions" },
+      { label: "Fee details", value: "Request current quote" },
+      { label: "Career outcome", value: "Job assurance at VOC centres" },
+    ],
+    modules: [
+      {
+        title: "Tools & Equipment",
+        description: "Identification and safe use of general-purpose workshop tools.",
+      },
+      {
+        title: "Workshop Equipment",
+        description: "Usage, maintenance and safety practices across core service equipment.",
+      },
+      {
+        title: "Measuring Instruments",
+        description: "Practical application of special tools, installers, pullers and measuring equipment.",
+      },
+    ],
+  },
+  {
+    id: "silver",
+    index: "02",
+    shortTitle: "Silver",
+    kicker: "Applied technician course",
+    title: "Silver Level Course",
+    stage: "Progression",
+    duration: "Ask admissions",
+    format: "Workshop-first",
+    practice: "Engine systems",
+    cta: { label: "Enquire now", href: "#contact" },
+    image: "/assets/vta-engine-image.webp",
+    imageAlt: "VOC Technical Academy engine training area with workshop equipment",
+    enrolmentDetails: [
+      { label: "Entry guidance", value: "Speak with admissions" },
+      { label: "Fee details", value: "Request current quote" },
+      { label: "Learning focus", value: "Service and maintenance" },
+    ],
+    modules: [
+      {
+        title: "Engine Fundamentals",
+        description: "Build practical confidence in engine systems, inspection and service procedures.",
+      },
+      {
+        title: "Periodic Maintenance",
+        description: "Apply structured multi-brand maintenance routines on live machines.",
+      },
+      {
+        title: "Electrical Foundations",
+        description: "Practice essential circuit checks and workshop-safe electrical diagnosis.",
+      },
+    ],
+  },
+  {
+    id: "gold",
+    index: "03",
+    shortTitle: "Gold",
+    kicker: "Advanced diagnostics course",
+    title: "Gold Level Course",
+    stage: "Advanced",
+    duration: "Ask admissions",
+    format: "Workshop-first",
+    practice: "Diagnostic tools",
+    cta: { label: "Enquire now", href: "#contact" },
+    image: "/assets/vta-technicalarea.webp",
+    imageAlt: "VOC Technical Academy technical training area for advanced diagnostics",
+    enrolmentDetails: [
+      { label: "Entry guidance", value: "Speak with admissions" },
+      { label: "Fee details", value: "Request current quote" },
+      { label: "Learning focus", value: "Fault finding and tools" },
+    ],
+    modules: [
+      {
+        title: "Troubleshooting",
+        description: "Use a systematic process to isolate faults across mechanical and electrical systems.",
+      },
+      {
+        title: "FI & OBD Tools",
+        description: "Read diagnostic data and apply FI and OBD tools to live service scenarios.",
+      },
+      {
+        title: "Workshop Process",
+        description: "Follow a professional service workflow from job card through final delivery.",
+      },
+    ],
+  },
+  {
+    id: "platinum",
+    index: "04",
+    shortTitle: "Platinum",
+    kicker: "Mastery and leadership course",
+    title: "Platinum Level Course",
+    stage: "Mastery",
+    duration: "Ask admissions",
+    format: "Workshop-first",
+    practice: "Service leadership",
+    cta: { label: "Enquire now", href: "#contact" },
+    image: "/assets/vta-service-area-image.webp",
+    imageAlt: "VOC Technical Academy live service area used for practical technician training",
+    enrolmentDetails: [
+      { label: "Entry guidance", value: "Speak with admissions" },
+      { label: "Fee details", value: "Request current quote" },
+      { label: "Learning focus", value: "Advanced service practice" },
+    ],
+    modules: [
+      {
+        title: "Advanced Diagnostics",
+        description: "Combine tools, measurements and service data to solve complex workshop cases.",
+      },
+      {
+        title: "Customer & Team Skills",
+        description: "Strengthen customer handling, communication and service-floor coordination.",
+      },
+      {
+        title: "Career Leadership",
+        description: "Prepare for senior technician, trainer and workshop responsibility pathways.",
+      },
+    ],
+  },
+] as const;
+
+export const BRONZE_COURSE = COURSE_LEVELS[0];
 
 export const WHY_VOC = {
   stats: [
