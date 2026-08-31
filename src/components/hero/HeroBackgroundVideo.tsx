@@ -6,6 +6,9 @@ const SHOW_HERO_BG_VIDEO = true;
 
 const HERO_BG_VIDEOS = [
   "/assets/videos/learners-bg.mp4",
+  "/assets/videos/talent-cloud-trainers.mp4",
+  "/assets/videos/talent-cloud-employers.mp4",
+  "/assets/videos/talent-cloud-partners.mp4",
 ];
 
 export function HeroBackgroundVideo() {
