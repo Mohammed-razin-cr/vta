@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
+const SHOW_HERO_BG_VIDEO = false;
+
 const HERO_BG_VIDEOS = [
   "/assets/videos/Enhanced_Cinematic_Video_Promp.mp4",
   "/assets/videos/Create_an_ultra_photorealistic.mp4",
@@ -12,6 +14,8 @@ export function HeroBackgroundVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  if (!SHOW_HERO_BG_VIDEO) return null;
 
   useEffect(() => {
     const video = videoRef.current;
