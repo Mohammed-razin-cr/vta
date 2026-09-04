@@ -1,5 +1,30 @@
 import Image from "next/image";
+import { Newspaper } from "lucide-react";
 import { TESTIMONIALS } from "@/lib/constants/landing-data";
+
+const MEDIA_OUTLETS = [
+    {
+        name: "Business Today",
+        category: "Business",
+        wordmark: (<><span>BUSINESS</span> <span className="text-[#27354b]">TODAY</span></>),
+    },
+    {
+        name: "ET Auto",
+        category: "Automotive",
+        wordmark: (<>ET <span className="text-[color:var(--brand-red)]">Auto</span></>),
+    },
+    {
+        name: "YourStory",
+        category: "Startup",
+        wordmark: (<span className="text-[color:var(--brand-red)]">YOURSTORY</span>),
+    },
+    {
+        name: "Inc42",
+        category: "Technology",
+        wordmark: (<>Inc<span className="text-[color:var(--brand-red)]">42</span></>),
+    },
+];
+
 export function Testimonials() {
     return (<section id="success-stories" className="bg-[#FEF5F4]">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 py-10 sm:py-14 grid lg:grid-cols-[1fr_320px] xl:grid-cols-[1fr_360px] gap-8 lg:gap-10">
@@ -22,19 +47,35 @@ export function Testimonials() {
               </li>))}
           </ul>
         </div>
-        <div>
-          <h3 className="landing-section-title mb-6 text-gray-900 reveal">Media &amp; Recognition</h3>
-          <div className="grid grid-cols-2 gap-4 text-gray-500">
-            <div className="text-[15px] font-black">BUSINESS TODAY</div>
-            <div className="text-[15px] font-black">
-              ET <span className="text-[color:var(--brand-red)]">Auto</span>
-            </div>
-            <div className="text-[15px] font-black text-[color:var(--brand-red)]">YOURSTORY</div>
-            <div className="text-[15px] font-black">
-              Inc<span className="text-[color:var(--brand-red)]">42</span>
+        <aside className="media-recognition-panel reveal lg:self-start" aria-labelledby="media-recognition-title">
+          <div className="media-recognition-panel__header">
+            <span className="media-recognition-panel__icon" aria-hidden="true">
+              <Newspaper size={21} strokeWidth={1.9}/>
+            </span>
+            <div>
+              <p className="media-recognition-panel__eyebrow">In the spotlight</p>
+              <h3 id="media-recognition-title" className="landing-section-title text-gray-900">
+                Media &amp; Recognition
+              </h3>
             </div>
           </div>
-        </div>
+
+          <p className="media-recognition-panel__intro">
+            Featured across leading business, automotive and startup publications.
+          </p>
+
+          <ul className="media-recognition-grid" aria-label="Publications featuring VTA">
+            {MEDIA_OUTLETS.map((outlet) => (<li key={outlet.name} className="media-recognition-card">
+                <span className="media-recognition-card__mark">{outlet.wordmark}</span>
+                <span className="media-recognition-card__category">{outlet.category}</span>
+              </li>))}
+          </ul>
+
+          <div className="media-recognition-panel__footer">
+            <span className="media-recognition-panel__pulse" aria-hidden="true"/>
+            Building trust across India&apos;s automotive ecosystem
+          </div>
+        </aside>
       </div>
     </section>);
 }

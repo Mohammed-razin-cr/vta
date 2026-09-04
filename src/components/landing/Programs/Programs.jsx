@@ -4,12 +4,12 @@ import { useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 const COURSE_LEVELS = [
     {
-        id: "bronze",
+        id: "beginner",
         index: "01",
-        shortTitle: "Bronze",
+        shortTitle: "Beginner",
         stage: "Foundation",
         kicker: "Flagship foundation course",
-        title: "Bronze Level Course",
+        title: "Beginner Level Course",
         duration: "120 hours",
         format: "Workshop-first",
         practice: "Live machines",
@@ -22,12 +22,12 @@ const COURSE_LEVELS = [
         ],
     },
     {
-        id: "silver",
+        id: "bronze",
         index: "02",
-        shortTitle: "Silver",
+        shortTitle: "Bronze",
         stage: "Progression",
         kicker: "Applied technician course",
-        title: "Silver Level Course",
+        title: "Bronze Level Course",
         duration: "Ask admissions",
         format: "Workshop-first",
         practice: "Engine systems",
@@ -40,12 +40,12 @@ const COURSE_LEVELS = [
         ],
     },
     {
-        id: "gold",
+        id: "silver",
         index: "03",
-        shortTitle: "Gold",
+        shortTitle: "Silver",
         stage: "Advanced",
         kicker: "Advanced diagnostics course",
-        title: "Gold Level Course",
+        title: "Silver Level Course",
         duration: "Ask admissions",
         format: "Workshop-first",
         practice: "Diagnostic tools",
@@ -58,12 +58,12 @@ const COURSE_LEVELS = [
         ],
     },
     {
-        id: "platinum",
+        id: "expert",
         index: "04",
-        shortTitle: "Platinum",
+        shortTitle: "Expert",
         stage: "Mastery",
         kicker: "Mastery and leadership course",
-        title: "Platinum Level Course",
+        title: "Expert Level Course",
         duration: "Ask admissions",
         format: "Workshop-first",
         practice: "Service leadership",
@@ -77,7 +77,7 @@ const COURSE_LEVELS = [
     },
 ];
 export function Programs() {
-    const [activeId, setActiveId] = useState("bronze");
+    const [activeId, setActiveId] = useState("beginner");
     const tabRefs = useRef([]);
     const activeCourse = COURSE_LEVELS.find((course) => course.id === activeId) ?? COURSE_LEVELS[0];
     const selectTab = (index) => {
@@ -101,7 +101,7 @@ export function Programs() {
         <div className="mt-8 reveal sm:mt-12 lg:mt-5">
           <div className="mb-4 flex items-center justify-between gap-4 lg:mb-2">
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-gray-700">Choose your level</p>
-            <p className="hidden font-mono text-[9px] uppercase tracking-[0.25em] text-gray-500 sm:block">Foundation to mastery</p>
+            <p className="hidden font-mono text-[9px] uppercase tracking-[0.25em] text-gray-500 sm:block">Beginner to expert</p>
           </div>
 
           <div role="tablist" aria-label="VTA course levels" className="grid grid-cols-2 overflow-hidden rounded-2xl border border-gray-300 bg-gray-300 sm:grid-cols-4">

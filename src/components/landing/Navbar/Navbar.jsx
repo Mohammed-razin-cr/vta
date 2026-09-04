@@ -44,7 +44,7 @@ export function Navbar() {
       <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-100">
         <div className="mx-auto max-w-[1536px] px-4 sm:px-8 h-20 sm:h-24 flex items-center justify-between gap-4 sm:gap-6">
           <Link href="/" className="relative flex shrink-0 items-center gap-3" aria-label="VTA Talent Cloud home">
-            <Image src="/assets/vta-logo.png" alt="VTA Talent Cloud" width={220} height={80} className="h-20 w-auto" priority/>
+            <Image src="/assets/vta-logo.png" alt="VTA Talent Cloud" width={220} height={80} className="h-20 w-auto" style={{ width: "auto" }} priority/>
             <span className="absolute left-[14px] top-[7px] grid h-[68px] w-[68px] place-items-center bg-white" aria-hidden="true">
               <Image src="/assets/vta-gear.png" alt="" width={66} height={66} className="navbar-logo-gear h-[66px] w-[66px] object-contain" priority/>
               <span className="absolute grid h-[38px] w-[38px] place-items-center rounded-full border border-gray-950 bg-white shadow-[inset_0_0_0_3px_white,inset_0_0_0_4px_#111827]">

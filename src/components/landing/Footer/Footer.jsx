@@ -7,7 +7,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-[1280px] grid-cols-2 gap-7 px-4 py-10 sm:gap-8 sm:px-6 sm:py-12 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8">
         <div className="col-span-2 md:col-span-3 lg:col-span-2 xl:col-span-2">
           <div className="bg-white rounded-md p-3 inline-block">
-            <Image src="/assets/vta-logo.png" alt="VTA Talent Cloud" width={160} height={56} className="h-14 w-auto"/>
+            <Image src="/assets/vta-logo.png" alt="VTA Talent Cloud" width={160} height={56} className="h-14 w-auto" style={{ width: "auto" }}/>
           </div>
           <p className="mt-4 text-[12px] text-white/70 leading-relaxed max-w-xs">
             VTA Talent Cloud™ is India&apos;s AI-Powered Automotive Workforce Platform, connecting talent, industry

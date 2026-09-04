@@ -58,7 +58,7 @@ export function TalentCloudDiagram() {
 
         <div className="talent-tech-core" aria-hidden="true">
           <div className="talent-tech-core__halo"/>
-          <Image src="/assets/vta-gear.png" alt="" fill priority className="talent-tech-core__gear"/>
+          <Image src="/assets/vta-gear.png" alt="" fill sizes="240px" priority className="talent-tech-core__gear"/>
           <div className="talent-tech-core__center">
             <span>Talent</span>
             <span>Cloud<sup>™</sup></span>
