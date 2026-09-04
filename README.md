@@ -8,17 +8,17 @@ was touched — this only adds a new public route.
 
 1. Copy `src/*` into your project's `src/` (folders merge; nothing here overwrites
    existing Employer/Employee code — everything lives under `landing/`, `common/`,
-   `hooks/`, `lib/constants/`, `types/`, and `styles/`, all newly created).
+   `hooks/`, `lib/constants/`, and `styles/`, all newly created).
 2. Copy `public/assets/*` into your project's `public/assets/`.
 3. Ensure these dependencies are installed (add whichever you don't already have):
    ```bash
    npm install clsx tailwind-merge lucide-react
    ```
 4. The route group `(public)` renders at `/`. If your app already has a root
-   `page.tsx` at `/`, move/rename it (e.g. into an existing route group) before
+   `page.jsx` at `/`, move/rename it (e.g. into an existing route group) before
    dropping this one in, or merge the two as your routing structure requires.
 5. This project's font is assumed to already be configured in your root
-   `app/layout.tsx` (the original page used Google's Inter at weights
+   `app/layout.jsx` (the original page used Google's Inter at weights
    400–900). If Inter isn't already loaded there, add it via `next/font/google`
    in your existing root layout — not modified here since that file belongs to
    the rest of the app.
@@ -39,13 +39,13 @@ was touched — this only adds a new public route.
   rather than a shared design-system look. Wrapping them in Shadcn's default
   `Button`/`DropdownMenu` primitives would either fight their default styles or
   require overriding nearly every class — which risks pixel drift. They're kept
-  as plain, strongly-typed elements with the exact original classes. Shadcn
+  as plain JSX elements with the exact original classes. Shadcn
   primitives can be layered in later for new sections without touching this one.
 - **Custom animations** (marquee, float, arrow-slide, soft-pulse, dash-flow,
   spin-slow, scroll-reveal) aren't expressible as core Tailwind utilities, so
   they live in `src/styles/landing.css`, imported only by the landing page —
   your global Tailwind config and the portals are untouched.
-- **Icons** are resolved through `DynamicIcon` (`src/components/common/DynamicIcon.tsx`),
+- **Icons** are resolved through `DynamicIcon` (`src/components/common/DynamicIcon.jsx`),
   keeping the original icon-name-as-data pattern so the section data arrays
   stay declarative instead of importing icons ad hoc in every file.
 - **Client boundaries** are scoped to only where interactivity is required:
@@ -59,26 +59,26 @@ was touched — this only adds a new public route.
 
 ```
 src/
-  app/(public)/page.tsx                 → public homepage route
+  app/(public)/page.jsx                 → public homepage route
+  app/layout.jsx                        → root layout and metadata
   components/landing/
-    Navbar/Navbar.tsx                   → header, dropdowns, mobile menu (client)
-    Hero/Hero.tsx                       → hero copy, CTAs, highlight stats
-    Hero/TalentCloudDiagram.tsx         → orbiting-avatars SVG diagram
-    BrandMarquee/BrandMarquee.tsx       → infinite brand-logo marquee
-    Solutions/Solutions.tsx             → 4-stakeholder cards
-    HowItWorks/HowItWorks.tsx           → 6-step workflow
-    Features/Features.tsx               → dark features grid
-    Stats/Stats.tsx                     → count-up stats grid (client)
-    Testimonials/Testimonials.tsx       → quotes + media logos
-    CTA/CTA.tsx                         → closing call-to-action band
-    Footer/Footer.tsx                   → footer columns, socials, app links
+    Navbar/Navbar.jsx                   → header, dropdowns, mobile menu (client)
+    Hero/Hero.jsx                       → hero copy, CTAs, highlight stats
+    Hero/TalentCloudDiagram.jsx         → orbiting-avatars SVG diagram
+    BrandMarquee/BrandMarquee.jsx       → infinite brand-logo marquee
+    Solutions/Solutions.jsx             → 4-stakeholder cards
+    HowItWorks/HowItWorks.jsx           → 6-step workflow
+    Features/Features.jsx               → dark features grid
+    Stats/Stats.jsx                     → count-up stats grid (client)
+    Testimonials/Testimonials.jsx       → quotes + media logos
+    CTA/CTA.jsx                         → closing call-to-action band
+    Footer/Footer.jsx                   → footer columns, socials, app links
   components/common/
-    DynamicIcon.tsx                     → icon-name → Lucide component resolver
-    ScrollReveal.tsx                    → reveal-on-scroll observer (client)
-  hooks/useCountUp.ts                   → count-up animation hook (client)
-  lib/utils.ts                          → cn() className helper
-  lib/constants/landing-data.ts         → all section data (nav, stats, steps, etc.)
-  types/landing.ts                      → shared interfaces
+    DynamicIcon.jsx                     → icon-name → Lucide component resolver
+    ScrollReveal.jsx                    → reveal-on-scroll observer (client)
+  hooks/useCountUp.js                   → count-up animation hook (client)
+  lib/utils.js                          → cn() className helper
+  lib/constants/landing-data.js         → all section data (nav, stats, steps, etc.)
   styles/landing.css                    → scoped keyframes/animation classes
 public/assets/*                         → all original image assets
 ```
