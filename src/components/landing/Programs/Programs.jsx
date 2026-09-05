@@ -85,7 +85,7 @@ export function Programs() {
         setActiveId(COURSE_LEVELS[nextIndex].id);
         tabRefs.current[nextIndex]?.focus();
     };
-    return (<section id="programs" className="scroll-mt-24 border-t border-gray-200 bg-[#f7f5f1] py-12 sm:py-16 lg:min-h-[calc(100dvh-6rem)] lg:py-8 xl:py-10">
+    return (<section id="programs" className="scroll-mt-24 border-t border-gray-200 bg-[#f7f5f1] py-10 sm:py-12 lg:py-8 xl:py-10">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6">
         <header className="grid gap-4 sm:gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(20rem,.75fr)] lg:items-end lg:gap-8">
           <div className="reveal">
@@ -100,8 +100,8 @@ export function Programs() {
 
         <div className="mt-8 reveal sm:mt-12 lg:mt-5">
           <div className="mb-4 flex items-center justify-between gap-4 lg:mb-2">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-gray-700">Choose your level</p>
-            <p className="hidden font-mono text-[9px] uppercase tracking-[0.25em] text-gray-500 sm:block">Beginner to expert</p>
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-gray-700">Choose your level</p>
+            <p className="hidden font-mono text-xs uppercase tracking-[0.2em] text-gray-500 sm:block">Beginner to expert</p>
           </div>
 
           <div role="tablist" aria-label="VTA course levels" className="grid grid-cols-2 overflow-hidden rounded-2xl border border-gray-300 bg-gray-300 sm:grid-cols-4">
@@ -128,9 +128,9 @@ export function Programs() {
                     ? "bg-[linear-gradient(135deg,#050505_0%,#101010_58%,#24130e_100%)] text-white"
                     : "bg-[#f7f5f1] text-gray-950 hover:bg-white")}>
                   <span className={cn("absolute inset-x-0 top-0 h-[3px] bg-[color:var(--brand-red)] transition-opacity", active ? "opacity-100" : "opacity-0 group-hover:opacity-100")}/>
-                  <span className={cn("font-mono text-[9px] font-semibold uppercase tracking-[0.18em]", active ? "text-white/45" : "text-gray-500")}>Level {course.index}</span>
+                  <span className={cn("font-mono text-[11px] font-semibold uppercase tracking-[0.16em]", active ? "text-white/55" : "text-gray-500")}>Level {course.index}</span>
                   <span className="mt-2 block text-lg font-bold leading-none lg:mt-1.5 lg:text-base">{course.shortTitle}</span>
-                  <span className={cn("mt-2 block text-[11px] lg:mt-1", active ? "text-white/55" : "text-gray-600")}>{course.stage}</span>
+                  <span className={cn("mt-2 block text-xs lg:mt-1", active ? "text-white/65" : "text-gray-600")}>{course.stage}</span>
                 </button>);
         })}
           </div>

@@ -332,6 +332,24 @@
   }
 }
 
+@media (min-width: 1160px) {
+  .talent-tech-stage {
+    --talent-diagram-scale: 0.86;
+  }
+}
+
+@media (min-width: 1440px) {
+  .talent-tech-stage {
+    --talent-diagram-scale: 0.94;
+  }
+}
+
+@media (min-width: 1680px) {
+  .talent-tech-stage {
+    --talent-diagram-scale: 1;
+  }
+}
+
 .talent-tech-diagram::before {
   content: "";
   position: absolute;
@@ -611,9 +629,9 @@
 
 @keyframes hero-headline-cycle {
   0% {
-    opacity: 0;
-    filter: blur(6px);
-    transform: translateY(58%);
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
   }
   4%,
   20% {

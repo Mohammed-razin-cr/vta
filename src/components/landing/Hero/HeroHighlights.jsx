@@ -43,12 +43,12 @@ export function HeroHighlights() {
             window.cancelAnimationFrame(animationFrame);
         };
     }, []);
-    return (<dl className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:grid-cols-4">
-      {HERO_HIGHLIGHTS.map((item, index) => {
+    return (<dl className="mt-8 grid grid-cols-1 gap-3 min-[300px]:grid-cols-2 sm:mt-10 sm:grid-cols-4">
+      {HERO_HIGHLIGHTS.map((item) => {
             const { target, suffix, finalValue } = parseValue(item.value);
             const currentValue = progress >= 1 ? target : target > 0 ? Math.min(target - 1, Math.floor(target * progress)) : 0;
             const displayValue = `${numberFormatter.format(currentValue)}${suffix}`;
-            return (<div key={item.label} className="reveal group grid min-h-[84px] grid-cols-[36px_minmax(0,1fr)] items-center gap-2.5 rounded-xl border border-red-100 bg-white/90 px-2.5 py-3 shadow-[0_8px_24px_-18px_rgba(31,41,55,0.35)] backdrop-blur-sm transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-0.5 hover:border-red-200 hover:shadow-[0_12px_28px_-16px_rgba(228,50,43,0.32)]" style={{ transitionDelay: `${300 + index * 80}ms` }}>
+            return (<div key={item.label} className="group grid min-h-[84px] grid-cols-[36px_minmax(0,1fr)] items-center gap-2.5 rounded-xl border border-red-100 bg-white/90 px-2.5 py-3 shadow-[0_8px_24px_-18px_rgba(31,41,55,0.35)] backdrop-blur-sm transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-0.5 hover:border-red-200 hover:shadow-[0_12px_28px_-16px_rgba(228,50,43,0.32)]">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-red-100 bg-[color:var(--brand-red-soft)] transition-transform duration-300 group-hover:scale-105">
               <DynamicIcon name={item.icon} className="h-[18px] w-[18px] text-[color:var(--brand-red)]"/>
             </div>

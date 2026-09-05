@@ -29,18 +29,18 @@ export function Testimonials() {
     return (<section id="success-stories" className="bg-[#FEF5F4]">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 py-10 sm:py-14 grid lg:grid-cols-[1fr_320px] xl:grid-cols-[1fr_360px] gap-8 lg:gap-10">
         <div>
-          <h3 className="landing-section-title mb-6 text-gray-900 reveal">What People Say</h3>
+          <h2 className="landing-section-title mb-6 text-gray-900 reveal">What People Say</h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
             {TESTIMONIALS.map((testimonial, i) => (<li key={testimonial.name} className="rounded-xl p-4 bg-white/50 hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300 reveal" style={{ transitionDelay: `${i * 120}ms` }}>
                 <figure>
                   <div className="flex items-center gap-3">
-                    <Image src={testimonial.avatar} alt="" width={48} height={48} className="w-12 h-12 rounded-full object-cover ring-2 ring-transparent hover:ring-[color:var(--brand-red)] transition-all duration-300"/>
+                    <Image src={testimonial.avatar} alt={`${testimonial.name.replace(/^–\s*/, "")} portrait`} width={48} height={48} className="w-12 h-12 rounded-full object-cover ring-2 ring-transparent hover:ring-[color:var(--brand-red)] transition-all duration-300"/>
                     <figcaption className="min-w-0">
-                      <div className="text-[12px] font-bold text-gray-900 truncate">{testimonial.name}</div>
-                      <div className="text-[11px] text-gray-500 truncate">{testimonial.role}</div>
+                      <div className="truncate text-sm font-bold text-gray-900">{testimonial.name}</div>
+                      <div className="truncate text-xs text-gray-600">{testimonial.role}</div>
                     </figcaption>
                   </div>
-                  <blockquote className="mt-3 text-[12px] italic text-gray-700 leading-relaxed">
+                  <blockquote className="mt-3 text-sm italic leading-6 text-gray-700">
                     &ldquo;{testimonial.quote}&rdquo;
                   </blockquote>
                 </figure>
@@ -54,9 +54,9 @@ export function Testimonials() {
             </span>
             <div>
               <p className="media-recognition-panel__eyebrow">In the spotlight</p>
-              <h3 id="media-recognition-title" className="landing-section-title text-gray-900">
+              <h2 id="media-recognition-title" className="landing-section-title text-gray-900">
                 Media &amp; Recognition
-              </h3>
+              </h2>
             </div>
           </div>
 

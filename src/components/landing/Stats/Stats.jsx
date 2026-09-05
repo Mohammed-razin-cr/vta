@@ -14,7 +14,7 @@ function StatCard({ stat, index }) {
         <dd className="text-[22px] font-black text-[color:var(--brand-red)] leading-none transition-transform duration-300 group-hover:scale-110 origin-left inline-block">
           <span ref={ref}>{display}</span>
         </dd>
-        <div className="text-[11px] text-gray-600 mt-1 transition-colors duration-300 group-hover:text-gray-900 group-hover:font-semibold">
+        <div className="mt-1 text-xs text-gray-600 transition-colors duration-300 group-hover:font-semibold group-hover:text-gray-900">
           {stat.label}
         </div>
       </div>
@@ -22,7 +22,7 @@ function StatCard({ stat, index }) {
 }
 export function Stats() {
     return (<section className="bg-white border-y border-gray-100">
-      <dl className="mx-auto max-w-[1280px] px-4 sm:px-6 py-8 sm:py-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
+      <dl className="mx-auto grid max-w-[1280px] grid-cols-1 gap-4 px-4 py-8 min-[360px]:grid-cols-2 sm:grid-cols-3 sm:gap-6 sm:px-6 sm:py-10 lg:grid-cols-6">
         {STATS.map((stat, i) => (<StatCard key={stat.label} stat={stat} index={i}/>))}
       </dl>
     </section>);

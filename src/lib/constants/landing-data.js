@@ -2,7 +2,7 @@ export const NAV_LINKS = [
     { label: "Platform", href: "#platform" },
     { label: "Solutions", href: "#solutions" },
     { label: "Employers", href: "#employers" },
-    { label: "OEM & CSR", href: "#oem-csr" },
+    { label: "OEM & CSR", href: "#partners" },
     { label: "Training", href: "#training" },
     { label: "Success Stories", href: "#success-stories" },
     { label: "About", href: "#about" },
@@ -130,12 +130,12 @@ export const FEATURES = [
     { icon: "smartphone", title: "Mobile App", desc: "Learn, apply & grow on-the-go" },
 ];
 export const STATS = [
-    { icon: "users", value: "10,000+", label: "Learners Trained", duration: 1800 },
-    { icon: "building-2", value: "500+", label: "Employers Onboarded", duration: 1950 },
-    { icon: "user-round", value: "200+", label: "Expert Trainers", duration: 2100 },
-    { icon: "shield-check", value: "95%", label: "Placement Success", duration: 2250 },
-    { icon: "handshake", value: "50+", label: "Partners & Collaborators", duration: 2400 },
-    { icon: "wrench", value: "25+", label: "States Presence", duration: 2550 },
+    { icon: "users", value: "10,000+", label: "Learners Trained", duration: 2000 },
+    { icon: "building-2", value: "500+", label: "Employers Onboarded", duration: 2000 },
+    { icon: "user-round", value: "200+", label: "Expert Trainers", duration: 2000 },
+    { icon: "shield-check", value: "95%", label: "Placement Success", duration: 2000 },
+    { icon: "handshake", value: "50+", label: "Partners & Collaborators", duration: 2000 },
+    { icon: "wrench", value: "25+", label: "Presence Across States", duration: 2000 },
 ];
 export const TESTIMONIALS = [
     {
@@ -158,18 +158,38 @@ export const TESTIMONIALS = [
     },
 ];
 export const FOOTER_COLUMNS = [
-    { title: "Platform", links: ["Overview", "Features", "How It Works", "Technology", "Security"] },
+    {
+        title: "Platform",
+        links: [
+            { label: "Overview", href: "#platform" },
+            { label: "Features", href: "#training" },
+            { label: "How It Works", href: "#platform" },
+        ],
+    },
     {
         title: "Solutions",
-        links: ["For Candidates", "For Employers", "For Trainers", "For Partners", "For OEM & CSR"],
+        links: [
+            { label: "For Candidates", href: "#candidates" },
+            { label: "For Employers", href: "#employers" },
+            { label: "For Trainers", href: "#trainers" },
+            { label: "For Partners", href: "#partners" },
+            { label: "For OEM & CSR", href: "#partners" },
+        ],
     },
     {
         title: "Programs",
-        links: ["Automotive Service", "EV Technology", "Diagnostics", "Soft Skills", "Certification"],
+        links: [
+            { label: "Course Levels", href: "#programs" },
+            { label: "Workshop Training", href: "#facilities" },
+            { label: "Certification", href: "#platform" },
+        ],
     },
-    { title: "Resources", links: ["Blog", "Case Studies", "Guides", "Events", "Careers"] },
     {
-        title: "Support",
-        links: ["Help Center", "Contact Us", "Terms & Conditions", "Privacy Policy"],
+        title: "Company",
+        links: [
+            { label: "About VTA", href: "#about" },
+            { label: "Success Stories", href: "#success-stories" },
+            { label: "Contact Us", href: "#contact" },
+        ],
     },
 ];

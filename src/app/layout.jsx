@@ -1,4 +1,5 @@
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site-config";
 import "./globals.css";
 /**
  * STANDALONE PREVIEW ONLY.
@@ -21,8 +22,53 @@ const jetBrainsMono = JetBrains_Mono({
     variable: "--font-nav-tech",
 });
 export const metadata = {
-    title: "VTA Talent Cloud™",
-    description: "India's AI-Powered Automotive Workforce Platform",
+    metadataBase: new URL(SITE_URL),
+    title: {
+        default: SITE_TITLE,
+        template: `%s | ${SITE_NAME}`,
+    },
+    description: SITE_DESCRIPTION,
+    applicationName: SITE_NAME,
+    alternates: {
+        canonical: "/",
+    },
+    openGraph: {
+        type: "website",
+        locale: "en_IN",
+        url: "/",
+        siteName: SITE_NAME,
+        title: SITE_TITLE,
+        description: SITE_DESCRIPTION,
+        images: [
+            {
+                url: "/opengraph-image",
+                width: 1200,
+                height: 630,
+                alt: "VTA Talent Cloud automotive workforce platform",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: SITE_TITLE,
+        description: SITE_DESCRIPTION,
+        images: ["/opengraph-image"],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+            "max-video-preview": -1,
+        },
+    },
+    icons: {
+        icon: "/assets/vta-gear.png",
+        apple: "/assets/vta-gear.png",
+    },
 };
 export default function RootLayout({ children }) {
     return (<html lang="en">

@@ -14,6 +14,9 @@ export function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [activeNav, setActiveNav] = useState("/");
     const dropdownWrapperRef = useRef(null);
+    const mobileTriggerRef = useRef(null);
+    const mobilePanelRef = useRef(null);
+    const mobileCloseRef = useRef(null);
     useEffect(() => {
         function handleClickOutside(event) {
             if (dropdownWrapperRef.current && !dropdownWrapperRef.current.contains(event.target)) {
@@ -31,8 +34,38 @@ export function Navbar() {
     }, []);
     useEffect(() => {
         document.body.style.overflow = mobileOpen ? "hidden" : "";
+        if (!mobileOpen)
+            return () => {
+                document.body.style.overflow = "";
+            };
+        const previouslyFocused = document.activeElement;
+        mobileCloseRef.current?.focus();
+        const handleKeyDown = (event) => {
+            if (event.key === "Escape") {
+                event.preventDefault();
+                setMobileOpen(false);
+                return;
+            }
+            if (event.key !== "Tab" || !mobilePanelRef.current)
+                return;
+            const focusable = Array.from(mobilePanelRef.current.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'));
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last?.focus();
+            }
+            else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first?.focus();
+            }
+        };
+        document.addEventListener("keydown", handleKeyDown);
         return () => {
             document.body.style.overflow = "";
+            document.removeEventListener("keydown", handleKeyDown);
+            if (previouslyFocused instanceof HTMLElement)
+                previouslyFocused.focus();
         };
     }, [mobileOpen]);
     const toggleDropdown = (key) => {
@@ -118,7 +151,7 @@ export function Navbar() {
               </div>
             </div>
 
-            <button type="button" onClick={() => setMobileOpen(true)} className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-white transition-colors hover:border-[color:var(--brand-red)] hover:text-[color:var(--brand-red)] min-[1160px]:hidden" aria-label="Open menu">
+            <button ref={mobileTriggerRef} type="button" onClick={() => setMobileOpen(true)} className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-gray-300 bg-white transition-colors hover:border-[color:var(--brand-red)] hover:text-[color:var(--brand-red)] min-[1160px]:hidden" aria-label="Open menu" aria-expanded={mobileOpen} aria-controls="mobile-navigation">
               <Menu className="w-5 h-5" aria-hidden="true"/>
             </button>
           </div>
@@ -127,10 +160,10 @@ export function Navbar() {
 
       <div className={`fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 ${mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`} onClick={closeMobile} aria-hidden="true"/>
 
-      <aside className={`fixed right-0 top-0 z-50 h-dvh w-[min(300px,calc(100vw-1rem))] max-w-full overflow-y-auto overscroll-contain bg-white px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[max(1rem,env(safe-area-inset-top))] shadow-xl transition-transform duration-300 ${mobileOpen ? "translate-x-0" : "translate-x-full"}`} aria-hidden={!mobileOpen} inert={!mobileOpen}>
+      <aside ref={mobilePanelRef} id="mobile-navigation" role="dialog" aria-modal="true" aria-label="Site navigation" className={`fixed right-0 top-0 z-50 h-dvh w-[min(300px,calc(100vw-1rem))] max-w-full overflow-y-auto overscroll-contain bg-white px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[max(1rem,env(safe-area-inset-top))] shadow-xl transition-transform duration-300 ${mobileOpen ? "translate-x-0" : "translate-x-full"}`} aria-hidden={!mobileOpen} inert={!mobileOpen}>
         <div className="flex items-center justify-between mb-4">
           <span className="font-bold text-gray-900">Menu</span>
-          <button type="button" onClick={closeMobile} className="flex h-11 w-11 items-center justify-center rounded-md hover:bg-gray-100" aria-label="Close menu">
+          <button ref={mobileCloseRef} type="button" onClick={closeMobile} className="flex h-11 w-11 items-center justify-center rounded-md hover:bg-gray-100" aria-label="Close menu">
             <X className="w-5 h-5" aria-hidden="true"/>
           </button>
         </div>

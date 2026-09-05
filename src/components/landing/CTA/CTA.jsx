@@ -9,21 +9,21 @@ export function CTA() {
           <h2 className="landing-section-title text-white reveal">
             Ready to Build the Future of Automotive Workforce?
           </h2>
-          <p className="mt-3 text-[13px] text-white/90 max-w-lg">
+          <p className="mt-3 max-w-lg text-sm leading-6 text-white/90">
             Join VTA Talent Cloud™ and be part of India&apos;s mission to create skilled, certified and employable
             automotive professionals.
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:justify-end">
-          <button className="inline-flex min-h-11 w-full items-center justify-between gap-2 rounded-md bg-white px-5 py-2.5 text-[13px] font-semibold text-gray-900 hover:bg-gray-100 sm:w-auto sm:justify-center">
+          <a href="#platform" className="inline-flex min-h-11 w-full items-center justify-between gap-2 rounded-md bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:w-auto sm:justify-center">
             Explore Platform <ArrowRight className="w-4 h-4 text-[color:var(--brand-red)]" aria-hidden="true"/>
-          </button>
-          <button className="inline-flex min-h-11 w-full items-center justify-between gap-2 rounded-md border border-white/60 bg-transparent px-5 py-2.5 text-[13px] font-semibold text-white hover:bg-white/10 sm:w-auto sm:justify-center">
+          </a>
+          <a href="#employers" className="inline-flex min-h-11 w-full items-center justify-between gap-2 rounded-md border border-white/60 bg-transparent px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:w-auto sm:justify-center">
             Hire Talent <ArrowRight className="w-4 h-4" aria-hidden="true"/>
-          </button>
-          <button className="inline-flex min-h-11 w-full items-center justify-between gap-2 rounded-md border border-white/60 bg-transparent px-5 py-2.5 text-[13px] font-semibold text-white hover:bg-white/10 sm:w-auto sm:justify-center">
+          </a>
+          <a href="#partners" className="inline-flex min-h-11 w-full items-center justify-between gap-2 rounded-md border border-white/60 bg-transparent px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:w-auto sm:justify-center">
             Become a Partner <ArrowRight className="w-4 h-4" aria-hidden="true"/>
-          </button>
+          </a>
         </div>
       </div>
     </section>);
