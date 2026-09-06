@@ -31,7 +31,7 @@ export function Testimonials() {
         <div>
           <h2 className="landing-section-title mb-6 text-gray-900 reveal">What People Say</h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
-            {TESTIMONIALS.map((testimonial, i) => (<li key={testimonial.name} className="rounded-xl p-4 bg-white/50 hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300 reveal" style={{ transitionDelay: `${i * 120}ms` }}>
+            {TESTIMONIALS.map((testimonial, i) => (<li key={testimonial.name} className="landing-card p-5 reveal" style={{ "--reveal-delay": `${i * 30}ms` }}>
                 <figure>
                   <div className="flex items-center gap-3">
                     <Image src={testimonial.avatar} alt={`${testimonial.name.replace(/^–\s*/, "")} portrait`} width={48} height={48} className="w-12 h-12 rounded-full object-cover ring-2 ring-transparent hover:ring-[color:var(--brand-red)] transition-all duration-300"/>

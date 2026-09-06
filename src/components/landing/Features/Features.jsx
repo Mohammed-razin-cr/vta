@@ -1,22 +1,69 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import { FEATURES } from "@/lib/constants/landing-data";
 import { DynamicIcon } from "@/components/common/DynamicIcon";
+import { ArrowRight } from "lucide-react";
+import styles from "./Features.module.css";
+
 export function Features() {
-    return (<section id="training" className="bg-white">
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 pb-12 sm:pb-16">
-        <div className="rounded-2xl bg-[#0E0E10] p-6 sm:p-10">
-          <h2 className="landing-section-title text-center text-white reveal">
-            Powerful <span className="text-[color:var(--brand-red)]">Platform.</span> Endless Possibilities.
-          </h2>
-          <div className="mt-8 grid grid-cols-1 gap-6 min-[360px]:grid-cols-2 sm:mt-10 sm:grid-cols-4 lg:grid-cols-8">
-            {FEATURES.map((feature, i) => (<div key={feature.title} className="text-center text-white group reveal" style={{ transitionDelay: `${i * 60}ms` }}>
-                <div className="mx-auto w-12 h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-300 group-hover:bg-[color:var(--brand-red)]/20 group-hover:border-[color:var(--brand-red)] group-hover:-translate-y-1 group-hover:shadow-[0_10px_25px_-10px_rgba(228,50,43,0.8)]">
-                  <DynamicIcon name={feature.icon} className="w-6 h-6 text-[color:var(--brand-red)] transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"/>
+    const panelRef = useRef(null);
+
+    useEffect(() => {
+        const panel = panelRef.current;
+        if (!panel || !('IntersectionObserver' in window)) return;
+
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                panel.dataset.revealed = "true";
+                observer.disconnect();
+            }
+        }, { threshold: 0, rootMargin: "0px 0px 64px 0px" });
+
+        observer.observe(panel);
+        return () => observer.disconnect();
+    }, []);
+
+    return (
+        <section id="training" aria-labelledby="platform-features-heading" className={styles.section}>
+            <div className={styles.container}>
+                <div ref={panelRef} className={styles.panel}>
+                    <div className={styles.header}>
+                        <div>
+                            <p className={styles.eyebrow}><span aria-hidden="true" />The VTA platform</p>
+                            <h2 id="platform-features-heading" className={"landing-section-title " + styles.title}>
+                                Powerful <span>Platform.</span>
+                                <span className={styles.titleLine}>Endless Possibilities.</span>
+                            </h2>
+                        </div>
+                        <p className={styles.intro}>
+                            From your first lesson to your next opportunity.
+                            Everything you need to learn, prove your skills and grow, in one place.
+                        </p>
+                    </div>
+
+                    <ul className={styles.grid}>
+                        {FEATURES.map((feature, index) => (
+                            <li key={feature.title} className={styles.card} style={{ "--card-index": index }}>
+                                <div className={styles.iconTile}>
+                                    <DynamicIcon name={feature.icon} className={styles.icon} />
+                                </div>
+                                <div className={styles.content}>
+                                    <h3 className={styles.cardTitle}>{feature.title}</h3>
+                                    <p className={styles.description}>{feature.desc}</p>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+
+                    <div className={styles.footer}>
+                        <p>Built for <span>learners, trainers, employers and partners.</span></p>
+                        <a href="#solutions" className={styles.exploreLink}>
+                            Explore our solutions <ArrowRight size={18} aria-hidden="true" />
+                        </a>
+                    </div>
                 </div>
-                <div className="mt-3 text-[13px] font-bold leading-tight">{feature.title}</div>
-                <div className="mt-1 text-xs leading-5 text-white/65">{feature.desc}</div>
-              </div>))}
-          </div>
-        </div>
-      </div>
-    </section>);
+            </div>
+        </section>
+    );
 }

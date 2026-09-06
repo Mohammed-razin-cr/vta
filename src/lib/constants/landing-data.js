@@ -130,12 +130,8 @@ export const FEATURES = [
     { icon: "smartphone", title: "Mobile App", desc: "Learn, apply & grow on-the-go" },
 ];
 export const STATS = [
-    { icon: "users", value: "10,000+", label: "Learners Trained", duration: 2000 },
-    { icon: "building-2", value: "500+", label: "Employers Onboarded", duration: 2000 },
-    { icon: "user-round", value: "200+", label: "Expert Trainers", duration: 2000 },
-    { icon: "shield-check", value: "95%", label: "Placement Success", duration: 2000 },
-    { icon: "handshake", value: "50+", label: "Partners & Collaborators", duration: 2000 },
-    { icon: "wrench", value: "25+", label: "Presence Across States", duration: 2000 },
+    { icon: "user-round", value: "200+", label: "Expert Trainers", duration: 1200 },
+    { icon: "wrench", value: "25+", label: "Presence Across States", duration: 1200 },
 ];
 export const TESTIMONIALS = [
     {

@@ -17,6 +17,7 @@ export function Navbar() {
     const mobileTriggerRef = useRef(null);
     const mobilePanelRef = useRef(null);
     const mobileCloseRef = useRef(null);
+    const headerRef = useRef(null);
     useEffect(() => {
         function handleClickOutside(event) {
             if (dropdownWrapperRef.current && !dropdownWrapperRef.current.contains(event.target)) {
@@ -27,10 +28,48 @@ export function Navbar() {
         return () => document.removeEventListener("click", handleClickOutside);
     }, []);
     useEffect(() => {
-        const syncActiveNav = () => setActiveNav(window.location.hash || "/");
+        const sections = [
+            ["solutions", "#solutions"],
+            ["programs", "#training"],
+            ["platform", "#platform"],
+            ["training", "#training"],
+            ["success-stories", "#success-stories"],
+            ["facilities", "#training"],
+            ["contact", "#contact"],
+            ["site-footer", "#about"],
+        ];
+        let frame = 0;
+        const syncActiveNav = () => {
+            frame = 0;
+            const readingLine = (headerRef.current?.getBoundingClientRect().height || 96) + 80;
+            let current = "/";
+            for (const [id, href] of sections) {
+                const section = document.getElementById(id);
+                if (section && section.getBoundingClientRect().top <= readingLine) current = href;
+            }
+            // The employer and partner links target cards within Solutions.
+            if (current === "#solutions" && ["#employers", "#partners"].includes(window.location.hash)) {
+                current = window.location.hash;
+            }
+            setActiveNav(current);
+        };
+        const scheduleSync = () => {
+            if (!frame) frame = window.requestAnimationFrame(syncActiveNav);
+        };
         syncActiveNav();
-        window.addEventListener("hashchange", syncActiveNav);
-        return () => window.removeEventListener("hashchange", syncActiveNav);
+        window.addEventListener("scroll", scheduleSync, { passive: true });
+        window.addEventListener("resize", scheduleSync);
+        window.addEventListener("hashchange", scheduleSync);
+        const resizeObserver = typeof ResizeObserver !== "undefined" ? new ResizeObserver(scheduleSync) : null;
+        resizeObserver?.observe(document.body);
+        if (headerRef.current) resizeObserver?.observe(headerRef.current);
+        return () => {
+            window.cancelAnimationFrame(frame);
+            window.removeEventListener("scroll", scheduleSync);
+            window.removeEventListener("resize", scheduleSync);
+            window.removeEventListener("hashchange", scheduleSync);
+            resizeObserver?.disconnect();
+        };
     }, []);
     useEffect(() => {
         document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -74,7 +113,7 @@ export function Navbar() {
     };
     const closeMobile = () => setMobileOpen(false);
     return (<>
-      <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-100">
+      <header ref={headerRef} className="sticky top-0 z-50 w-full bg-white border-b border-gray-100">
         <div className="mx-auto max-w-[1536px] px-4 sm:px-8 h-20 sm:h-24 flex items-center justify-between gap-4 sm:gap-6">
           <Link href="/" className="relative flex shrink-0 items-center gap-3" aria-label="VTA Talent Cloud home">
             <Image src="/assets/vta-logo.png" alt="VTA Talent Cloud" width={220} height={80} className="h-20 w-auto" style={{ width: "auto" }} priority/>

@@ -8,6 +8,26 @@
   --brand-red: #e4322b;
   --brand-red-dark: #c41e1a;
   --brand-red-soft: #fdecec;
+  --card-radius: 16px;
+  --card-border: #e2e3e7;
+  --card-shadow: 0 3px 10px rgb(17 24 39 / 4%);
+  --card-shadow-hover: 0 10px 24px -8px rgb(17 24 39 / 14%);
+}
+
+.landing-card {
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  background: #fff;
+  box-shadow: var(--card-shadow);
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .landing-card:hover {
+    transform: translateY(-3px);
+    border-color: #d6a2a2;
+    box-shadow: var(--card-shadow-hover);
+  }
 }
 
 .landing-page :is(h1, h2, h3, h4, h5, h6) {
@@ -776,6 +796,37 @@
     inset 0 -6px 10px rgba(84, 5, 12, 0.22);
 }
 
+.hero-cta-pill--secondary,
+.hero-cta-pill--secondary:is(:hover, :focus-visible) {
+  border-color: #d2d5dc;
+  background: rgb(255 255 255 / 90%);
+  color: #374151;
+  box-shadow: none;
+}
+
+.hero-cta-pill--secondary .hero-cta-pill__label,
+.hero-cta-pill--secondary:is(:hover, :focus-visible, :active) .hero-cta-pill__label {
+  background: transparent;
+  color: inherit;
+  box-shadow: none;
+  text-shadow: none;
+  filter: none;
+  transform: none;
+}
+
+.hero-cta-pill--secondary .hero-cta-pill__arrow {
+  border-color: #d2d5dc;
+  background: transparent;
+}
+
+.hero-cta-pill--secondary:is(:hover, :focus-visible) {
+  color: var(--brand-red-dark);
+  border-color: var(--brand-red-dark);
+}
+
+.hero-cta-pill--secondary .hero-cta-pill__tire { animation-play-state: paused; }
+.hero-cta-pill--secondary:is(:hover, :focus-visible) .hero-cta-pill__tire { animation-play-state: running; }
+
 @media (max-width: 479px) {
   .hero-cta-pill {
     width: 100%;
@@ -808,13 +859,16 @@
 }
 
 .reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  opacity: 1;
 }
 .reveal.in-view {
-  opacity: 1;
-  transform: none;
+  animation: section-reveal 320ms ease-out backwards;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+@keyframes section-reveal {
+  from { opacity: .75; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -860,7 +914,8 @@
   .nav-underline-link::after {
     transition: none;
   }
-  .reveal {
+  .reveal, .reveal.in-view {
+    animation: none;
     opacity: 1;
     transform: none;
     transition: none;
@@ -874,49 +929,17 @@ button:focus-visible,
   outline-offset: 2px;
   border-radius: 6px;
 }
-/* Rotating click feedback for the four stakeholder cards. */
+/* Shared card styling with a restrained selected state. */
 .stakeholder-card {
   isolation: isolate;
-  background: transparent;
-}
-
-.stakeholder-card::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  z-index: 0;
-  width: 112px;
-  height: 520px;
-  opacity: 0;
-  background: linear-gradient(
-    180deg,
-    #dc143c 0%,
-    #800020 32%,
-    #ef2f2a 66%,
-    #a00032 100%
-  );
-  transform: translate(-50%, -50%) rotate(0deg);
-  transform-origin: center;
-  transition: opacity 300ms ease;
-  animation: stakeholder-border-rotation 3.6s linear infinite;
-  animation-play-state: paused;
-  will-change: transform;
-}
-
-.stakeholder-card:hover::before,
-.stakeholder-card:focus-visible::before,
-.stakeholder-card.is-active::before {
-  opacity: 1;
-  animation-play-state: running;
+  background: #fff;
 }
 
 .stakeholder-card:hover,
 .stakeholder-card:focus-visible,
 .stakeholder-card.is-active {
-  box-shadow:
-    0 18px 38px -22px rgba(128, 0, 32, 0.72),
-    0 0 0 1px rgba(220, 20, 60, 0.14);
+  border-color: var(--brand-red);
+  box-shadow: var(--card-shadow-hover);
 }
 
 .stakeholder-card__content::before {
@@ -925,8 +948,8 @@ button:focus-visible,
   inset: 0;
   z-index: -1;
   opacity: 0;
-  background: radial-gradient(circle at 50% 100%, rgba(220, 20, 60, 0.12), transparent 58%);
-  transition: opacity 300ms ease;
+  background: linear-gradient(180deg, transparent 55%, rgb(228 50 43 / 5%));
+  transition: opacity 200ms ease;
   pointer-events: none;
 }
 
@@ -936,17 +959,11 @@ button:focus-visible,
   opacity: 1;
 }
 
-@keyframes stakeholder-border-rotation {
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .stakeholder-card::before {
-    animation: none;
-    transform: translate(-50%, -50%) rotate(35deg);
+  .landing-card, .stakeholder-card__content::before {
+    transition: none;
   }
+  .landing-card:hover { transform: none; }
 }
 
 /* Editorial media-recognition panel. */
@@ -1042,9 +1059,9 @@ button:focus-visible,
   overflow: hidden;
   padding: 14px;
   border: 1px solid rgba(148, 163, 184, 0.2);
-  border-radius: 15px;
+  border-radius: var(--card-radius);
   background: rgba(255, 255, 255, 0.84);
-  box-shadow: 0 8px 24px -22px rgba(15, 23, 42, 0.5);
+  box-shadow: var(--card-shadow);
   transition:
     transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
     border-color 220ms ease,
@@ -1111,7 +1128,7 @@ button:focus-visible,
   .media-recognition-card:hover {
     border-color: rgba(196, 30, 26, 0.27);
     background: #fff;
-    box-shadow: 0 15px 30px -23px rgba(133, 22, 32, 0.55);
+    box-shadow: var(--card-shadow-hover);
     transform: translateY(-3px);
   }
 

@@ -1,48 +1,87 @@
 import Image from "next/image";
 import { ArrowUpRight, Smartphone } from "lucide-react";
 import { FOOTER_COLUMNS } from "@/lib/constants/landing-data";
+import styles from "./Footer.module.css";
+
+function FooterRibbon({ side }) {
+    const gradientId = "footer-ribbon-" + side;
+    return (
+        <svg className={styles.ribbon + " " + (side === "right" ? styles.ribbonRight : styles.ribbonLeft)} viewBox="0 0 320 620" fill="none" aria-hidden="true" focusable="false">
+            <defs>
+                <linearGradient id={gradientId} x1="14" y1="60" x2="245" y2="366" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#170304" />
+                    <stop offset=".5" stopColor="#830f14" />
+                    <stop offset=".78" stopColor="var(--footer-red)" />
+                    <stop offset="1" stopColor="#340608" />
+                </linearGradient>
+                <linearGradient id={gradientId + "-fold"} x1="6" y1="454" x2="263" y2="168" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#170304" />
+                    <stop offset=".52" stopColor="#a31319" />
+                    <stop offset="1" stopColor="var(--footer-red)" />
+                </linearGradient>
+            </defs>
+            <path d="M-81-86 210 196Q234 220 210 246L-58 516-147 418 102 171-126-49Z" fill={"url(#" + gradientId + ")"} />
+            <path d="m-38 163 262 249q26 25 0 51L-23 708-128 603 116 363-128 121Z" fill={"url(#" + gradientId + "-fold)"} opacity=".74" />
+            <path d="M-32-22 255 251M-37 151 282 453M-30 577 215 332" stroke="var(--footer-red)" strokeOpacity=".26" />
+            <path d="m-30-42 288 274M-21 613 265 329" stroke="var(--footer-red)" strokeOpacity=".12" />
+        </svg>
+    );
+}
+
 export function Footer() {
     const year = new Date().getFullYear();
-    return (<footer className="bg-black text-white">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-2 gap-7 px-4 py-10 sm:gap-8 sm:px-6 sm:py-12 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
-        <div id="about" className="col-span-2 scroll-mt-28 md:col-span-3 lg:col-span-2 xl:col-span-2">
-          <div className="bg-white rounded-md p-3 inline-block">
-            <Image src="/assets/vta-logo.png" alt="VTA Talent Cloud" width={160} height={56} className="h-14 w-auto" style={{ width: "auto" }}/>
-          </div>
-          <p className="mt-4 max-w-xs text-sm leading-6 text-white/70">
-            VTA Talent Cloud™ is India&apos;s AI-Powered Automotive Workforce Platform, connecting talent, industry
-            and opportunities.
-          </p>
-          <a href="#contact" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-md bg-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[color:var(--brand-red)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
-            Contact VTA <ArrowUpRight className="h-4 w-4" aria-hidden="true"/>
-          </a>
-        </div>
+    return (
+        <footer id="site-footer" className={styles.footer}>
+            <div className={styles.atmosphere} aria-hidden="true">
+                <FooterRibbon side="left" />
+                <FooterRibbon side="right" />
+                <div className={styles.horizon} />
+            </div>
 
-        {FOOTER_COLUMNS.map((column) => (<div key={column.title}>
-            <h2 className="mb-3 text-sm font-bold text-white">{column.title}</h2>
-            <ul className="space-y-2">
-              {column.links.map((link) => (<li key={`${column.title}-${link.label}`}>
-                  <a href={link.href} className="inline-flex min-h-8 items-center text-sm text-white/65 transition-colors hover:text-[color:var(--brand-red)]">
-                    {link.label}
-                  </a>
-                </li>))}
-            </ul>
-          </div>))}
+            <div className={styles.container}>
+                <div id="about" className={styles.intro}>
+                    <div className={styles.logoPlate}>
+                        <Image src="/assets/vta-logo.png" alt="VTA Talent Cloud" width={160} height={56} className={styles.logo} />
+                    </div>
+                    <p className={styles.statement}>
+                        VTA Talent Cloud™ is India&apos;s AI-Powered Automotive Workforce Platform, connecting talent, industry
+                        and opportunities.
+                    </p>
+                    <a href="#contact" className={styles.contactLink}>
+                        <span>Contact VTA</span><ArrowUpRight size={18} aria-hidden="true" />
+                    </a>
+                </div>
 
-        <div>
-          <h2 className="mb-3 text-sm font-bold text-white">Mobile App</h2>
-          <div className="rounded-lg border border-white/10 bg-white/5 p-3 text-white/70">
-            <Smartphone className="h-5 w-5 text-[color:var(--brand-red)]" aria-hidden="true"/>
-            <p className="mt-2 text-sm font-semibold text-white">Coming soon</p>
-            <p className="mt-1 text-xs leading-5">Learn and track your progress on the go.</p>
-          </div>
-        </div>
-      </div>
+                <div className={styles.navigationPanel}>
+                    <div className={styles.navigationGrid}>
+                        {FOOTER_COLUMNS.map((column) => (
+                            <div key={column.title} className={styles.column}>
+                                <h2>{column.title}</h2>
+                                <ul>
+                                    {column.links.map((link) => (
+                                        <li key={column.title + "-" + link.label}>
+                                            <a href={link.href}>{link.label}</a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
 
-      <div className="border-t border-white/10">
-        <div className="mx-auto max-w-[1280px] px-6 py-4 text-center text-xs text-white/55">
-          © {year} VOC Technical Academy. All rights reserved.
-        </div>
-      </div>
-    </footer>);
+                        <div className={styles.appColumn}>
+                            <h2>Mobile App</h2>
+                            <div className={styles.appCard}>
+                                <span className={styles.appIcon}><Smartphone size={23} aria-hidden="true" /></span>
+                                <p className={styles.appStatus}>Coming soon</p>
+                                <p className={styles.appDescription}>Learn and track your progress on the go.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={styles.bottomBar}>
+                    <p>© {year} VOC Technical Academy. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    );
 }

@@ -1,107 +1,287 @@
 "use client";
+
 import Image from "next/image";
-import { ArrowLeft } from "lucide-react";
-import { useCallback, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight, Expand, X } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import styles from "./Facilities.module.css";
+
 const FACILITIES = [
     {
         title: "Classroom",
+        category: "Theory & discussion",
+        description: "Build your foundation through trainer-led sessions and shared learning.",
         image: "/assets/vta-classroom.webp",
-        alt: "Classroom at VOC Technical Academy",
+        alt: "Learners in red VTA vests taking part in a classroom session",
     },
     {
         title: "Electrical Circuit Area",
+        category: "Wiring & circuits",
+        description: "Follow the connections and understand how electrical systems work.",
         image: "/assets/vta-eca-image.webp",
-        alt: "Electrical Circuit Area at VOC Technical Academy",
+        alt: "Two-wheeler electrical training board with wiring diagrams and components",
     },
     {
         title: "Engine Area",
+        category: "Components & mechanics",
+        description: "Explore engine components up close with cutaway training models.",
         image: "/assets/vta-engine-image.webp",
-        alt: "Engine Area at VOC Technical Academy",
+        alt: "Cutaway engine model showing internal gears and mechanical components",
     },
     {
         title: "Service Area",
+        category: "Workshop practice",
+        description: "Bring your skills to the workshop and get familiar with service equipment.",
         image: "/assets/vta-service-area-image.webp",
-        alt: "Service Area at VOC Technical Academy",
+        alt: "Practical service training area at VOC Technical Academy",
     },
     {
         title: "Technical Area",
+        category: "Hands-on learning",
+        description: "Connect theory with practice through guided technical exercises.",
         image: "/assets/vta-technicalarea.webp",
-        alt: "Technical Area at VOC Technical Academy",
+        alt: "Technical training equipment at VOC Technical Academy",
     },
 ];
+
+const formatNumber = (value) => String(value).padStart(2, "0");
+
 export function Facilities() {
     const trackRef = useRef(null);
-    const [activeIndex, setActiveIndex] = useState(0);
-    const scrollToCard = useCallback((index) => {
+    const dialogRef = useRef(null);
+    const scrollTimerRef = useRef(null);
+    const requestedPositionRef = useRef(null);
+    const [view, setView] = useState({ first: 0, last: 0, canPrevious: false, canNext: true });
+    const [photoIndex, setPhotoIndex] = useState(null);
+    const photo = FACILITIES[photoIndex ?? 0];
+    const photoOpen = photoIndex !== null;
+
+    const syncView = useCallback(() => {
         const track = trackRef.current;
-        if (!track)
-            return;
-        const wrappedIndex = (index + FACILITIES.length) % FACILITIES.length;
-        const card = track.querySelector(`[data-facility-index="${wrappedIndex}"]`);
-        if (!card)
-            return;
-        track.scrollTo({ left: card.offsetLeft, behavior: "smooth" });
-        setActiveIndex(wrappedIndex);
-    }, []);
-    const syncActiveCard = () => {
-        const track = trackRef.current;
-        if (!track)
-            return;
+        if (!track) return;
+
+        const frame = track.getBoundingClientRect();
         const cards = Array.from(track.querySelectorAll("[data-facility-index]"));
-        const closestCard = cards.reduce((closest, card, index) => {
-            const distance = Math.abs(card.offsetLeft - track.scrollLeft);
+        const visible = cards.flatMap((card, index) => {
+            const rect = card.getBoundingClientRect();
+            return rect.left >= frame.left - 2 && rect.right <= frame.right + 2 ? [index] : [];
+        });
+        const nearest = cards.reduce((closest, card, index) => {
+            const distance = Math.abs(card.getBoundingClientRect().left - frame.left);
             return distance < closest.distance ? { index, distance } : closest;
-        }, { index: 0, distance: Number.POSITIVE_INFINITY });
-        setActiveIndex(closestCard.index);
+        }, { index: 0, distance: Infinity }).index;
+
+        setView({
+            first: visible[0] ?? nearest,
+            last: visible.at(-1) ?? nearest,
+            canPrevious: track.scrollLeft > 2,
+            canNext: track.scrollLeft < track.scrollWidth - track.clientWidth - 2,
+        });
+        requestedPositionRef.current = null;
+    }, []);
+
+    useEffect(() => {
+        const track = trackRef.current;
+        if (!track) return;
+        const observer = new ResizeObserver(syncView);
+        observer.observe(track);
+        syncView();
+        return () => {
+            observer.disconnect();
+            window.clearTimeout(scrollTimerRef.current);
+        };
+    }, [syncView]);
+
+    useEffect(() => {
+        if (!photoOpen) return;
+        const dialog = dialogRef.current;
+        const previousOverflow = document.body.style.overflow;
+        dialog.showModal();
+        document.body.style.overflow = "hidden";
+        return () => {
+            dialog.close();
+            document.body.style.overflow = previousOverflow;
+        };
+    }, [photoOpen]);
+
+    const handleScroll = () => {
+        window.clearTimeout(scrollTimerRef.current);
+        scrollTimerRef.current = window.setTimeout(syncView, 120);
     };
-    return (<section id="facilities" className="scroll-mt-24 overflow-hidden border-t border-[#d9d6cf] bg-[#f7f5f1] py-12 sm:py-16 lg:py-20">
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-6">
-        <div className="flex items-end justify-between gap-8">
-          <div>
-            <h2 className="landing-section-title max-w-[850px] text-[#151310]">
-              Built like the workshops
-              <span className="mt-2 block text-[color:var(--brand-red)]">you&apos;ll work in.</span>
-            </h2>
-            <p className="mt-6 max-w-2xl text-base leading-7 text-gray-600 sm:text-lg sm:leading-8">
-              Classrooms, circuit benches, engine bays and live service areas.
-              <span className="block">Training happens where the work happens.</span>
-            </p>
-          </div>
 
-          <div className="hidden shrink-0 items-center gap-2 pb-1 md:flex">
-            <button type="button" onClick={() => scrollToCard(activeIndex - 1)} aria-label="Previous facility" className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-md border border-[#151310] bg-[#151310] text-white transition-colors duration-200 hover:bg-[color:var(--brand-red)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-red)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f1]">
-              <ArrowLeft className="h-4 w-4" aria-hidden="true"/>
-            </button>
-            <button type="button" onClick={() => scrollToCard(activeIndex + 1)} aria-label="Next facility" className="inline-flex h-11 cursor-pointer items-center justify-center rounded-md border border-gray-400 bg-transparent px-4 text-sm font-semibold text-[#151310] transition-colors duration-200 hover:border-[#151310] hover:bg-[#151310] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-red)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f1]">
-              Next
-            </button>
-          </div>
-        </div>
+    const navigate = (direction) => {
+        const track = trackRef.current;
+        if (!track) return;
+        const maxScroll = track.scrollWidth - track.clientWidth;
+        const frame = track.getBoundingClientRect();
+        // Track-relative stops stay accurate in centered layouts; the final stop uses the real scroll limit.
+        const positions = Array.from(track.querySelectorAll("[data-facility-index]")).map((card) =>
+            Math.min(maxScroll, Math.max(0, card.getBoundingClientRect().left - frame.left + track.scrollLeft)),
+        );
+        const current = requestedPositionRef.current ?? track.scrollLeft;
+        let target;
+        if (direction === "first") target = 0;
+        else if (direction === "last") target = maxScroll;
+        else if (direction === "next") target = positions.find((position) => position > current + 2) ?? maxScroll;
+        else target = positions.findLast((position) => position < current - 2) ?? 0;
 
-        <div className="mt-8 sm:mt-12">
-          <div className="mb-4 flex items-center justify-between md:hidden">
-            <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-gray-500">Swipe to explore</span>
-            <span aria-live="polite" className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[color:var(--brand-red)]">
-              {String(activeIndex + 1).padStart(2, "0")} / {String(FACILITIES.length).padStart(2, "0")}
-            </span>
-          </div>
+        requestedPositionRef.current = target;
+        track.scrollTo({
+            left: target,
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+        });
+    };
 
-          <div ref={trackRef} role="region" aria-label="Academy facilities" tabIndex={0} onScroll={syncActiveCard} className="facilities-track touch-pan-x snap-x snap-mandatory overflow-x-auto pb-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-red)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f5f1]">
-            <div className="flex w-max gap-5 md:gap-6">
-              {FACILITIES.map((facility, index) => (<figure key={facility.title} data-facility-index={index} className="group w-[78vw] shrink-0 snap-start overflow-hidden rounded-[20px] border border-[#d9d6cf] bg-white transition-[border-color,box-shadow] duration-300 hover:border-gray-400 hover:shadow-[0_24px_45px_-32px_rgba(20,20,20,.45)] sm:w-[380px] lg:w-[420px]">
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image src={facility.image} alt={facility.alt} fill sizes="(max-width: 640px) 78vw, (max-width: 1023px) 380px, 420px" className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.025]"/>
-                  </div>
-                  <figcaption className="flex min-h-14 items-center justify-between gap-4 border-t border-[#d9d6cf] px-5 py-4">
-                    <span className="font-semibold text-[#151310]">{facility.title}</span>
-                    <span className="shrink-0 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-gray-500">
-                      {String(index + 1).padStart(2, "0")} / {String(FACILITIES.length).padStart(2, "0")}
-                    </span>
-                  </figcaption>
-                </figure>))}
+    const handleTrackKeyDown = (event) => {
+        if (event.target !== event.currentTarget || event.altKey || event.ctrlKey || event.metaKey) return;
+        const direction = { ArrowLeft: "previous", ArrowRight: "next", Home: "first", End: "last" }[event.key];
+        if (!direction) return;
+        event.preventDefault();
+        navigate(direction);
+    };
+
+    const closePhoto = () => dialogRef.current?.close();
+    const changePhoto = (direction) => {
+        const nextIndex = Math.min(FACILITIES.length - 1, Math.max(0, (photoIndex ?? 0) + direction));
+        const focusedLabel = document.activeElement?.getAttribute("aria-label");
+        // Move focus before disabling the button that reached the first or last photo.
+        if (nextIndex === FACILITIES.length - 1 && focusedLabel === "Next photo") {
+            dialogRef.current?.querySelector('[aria-label="Previous photo"]')?.focus();
+        } else if (nextIndex === 0 && focusedLabel === "Previous photo") {
+            dialogRef.current?.querySelector('[aria-label="Next photo"]')?.focus();
+        }
+        setPhotoIndex(nextIndex);
+    };
+
+    return (
+        <section id="facilities" aria-labelledby="facilities-heading" className={styles.section}>
+            <div className={styles.container}>
+                <div className={styles.header}>
+                    <div>
+                        <p className={styles.eyebrow}><span aria-hidden="true" />Our training spaces</p>
+                        <h2 id="facilities-heading" className="landing-section-title text-[#151310]">
+                            Built like the workshops
+                            <span className={styles.accent}>you&apos;ll work in.</span>
+                        </h2>
+                    </div>
+                    <p className={styles.intro}>
+                        Classrooms, circuit benches, engine bays and live service areas.
+                        <span>Training happens where the work happens.</span>
+                    </p>
+                </div>
+
+                <p id="facilities-instructions" className="sr-only">
+                    Use the previous and next buttons or swipe to explore all five spaces. When the gallery is focused,
+                    use the arrow keys, Home or End. Select a photo to view it larger.
+                </p>
+                <div
+                    ref={trackRef}
+                    id="facilities-gallery"
+                    role="region"
+                    aria-roledescription="carousel"
+                    aria-label="Training spaces gallery"
+                    aria-describedby="facilities-instructions"
+                    tabIndex={0}
+                    onScroll={handleScroll}
+                    onKeyDown={handleTrackKeyDown}
+                    className={styles.track}
+                >
+                    {FACILITIES.map((facility, index) => (
+                        <figure key={facility.title} data-facility-index={index} className={styles.card}>
+                            <button
+                                type="button"
+                                className={styles.photoButton}
+                                aria-label={"View " + facility.title + " photo"}
+                                aria-haspopup="dialog"
+                                onClick={() => setPhotoIndex(index)}
+                            >
+                                <Image
+                                    src={facility.image}
+                                    alt={facility.alt}
+                                    fill
+                                    sizes="(max-width: 639px) 85vw, (max-width: 1023px) 46vw, (max-width: 1279px) 31vw, 395px"
+                                    className={styles.image}
+                                />
+                                <span className={styles.photoNumber} aria-hidden="true">{formatNumber(index + 1)} / 05</span>
+                                <span className={styles.expandLabel} aria-hidden="true"><Expand size={16} /><span>View photo</span></span>
+                            </button>
+                            <figcaption className={styles.caption}>
+                                <p className={styles.category}>{facility.category}</p>
+                                <h3>{facility.title}</h3>
+                                <p className={styles.description}>{facility.description}</p>
+                            </figcaption>
+                        </figure>
+                    ))}
+                </div>
+
+                <div className={styles.footer}>
+                    <div className={styles.status}>
+                        <span className={styles.count} aria-live="polite" aria-atomic="true">
+                            <span className="sr-only">Showing training spaces </span>
+                            <strong>{formatNumber(view.first + 1)}{view.last > view.first && "–" + formatNumber(view.last + 1)}</strong>
+                            <span> / 05</span>
+                        </span>
+                        <span className={styles.browseHint}>Explore every space</span>
+                    </div>
+                    <div className={styles.progress} aria-hidden="true">
+                        <span style={{ transform: "scaleX(" + (view.last + 1) / FACILITIES.length + ")" }} />
+                    </div>
+                    <div className={styles.controls}>
+                        <button type="button" onClick={() => navigate("previous")} disabled={!view.canPrevious} aria-label="Previous facility" aria-controls="facilities-gallery" className={styles.previous}>
+                            <ArrowLeft size={18} aria-hidden="true" />
+                        </button>
+                        <button type="button" onClick={() => navigate("next")} disabled={!view.canNext} aria-label="Next facility" aria-controls="facilities-gallery" className={styles.next}>
+                            <span>Next</span><ArrowRight size={18} aria-hidden="true" />
+                        </button>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>);
+
+            <dialog
+                ref={dialogRef}
+                className={styles.dialog}
+                aria-labelledby="facility-photo-title"
+                aria-describedby="facility-photo-description"
+                onClose={() => setPhotoIndex(null)}
+                onClick={(event) => { if (event.target === event.currentTarget) closePhoto(); }}
+                onKeyDown={(event) => {
+                    if (event.key === "Tab") {
+                        const buttons = Array.from(event.currentTarget.querySelectorAll("button:not(:disabled)"));
+                        const first = buttons[0];
+                        const last = buttons.at(-1);
+                        const focused = document.activeElement;
+                        if (!buttons.includes(focused) || (event.shiftKey ? focused === first : focused === last)) {
+                            event.preventDefault();
+                            (event.shiftKey ? last : first)?.focus();
+                        }
+                    }
+                    if (event.altKey || event.ctrlKey || event.metaKey) return;
+                    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+                        event.preventDefault();
+                        changePhoto(event.key === "ArrowLeft" ? -1 : 1);
+                    }
+                }}
+            >
+                {photoOpen && <div>
+                    <div className={styles.dialogHeader}>
+                        <span>Inside VOC Technical Academy</span>
+                        <button type="button" autoFocus onClick={closePhoto} aria-label="Close photo" className={styles.closeButton}><X size={22} aria-hidden="true" /></button>
+                    </div>
+                    <div className={styles.fullPhoto}>
+                        <Image src={photo.image} alt={photo.alt} fill sizes="(max-width: 1023px) 94vw, 1000px" className={styles.fullImage} />
+                    </div>
+                    <div className={styles.dialogFooter}>
+                        <div aria-live="polite" aria-atomic="true">
+                            <p className={styles.dialogCount}>{formatNumber((photoIndex ?? 0) + 1)} / 05 · {photo.category}</p>
+                            <h3 id="facility-photo-title">{photo.title}</h3>
+                            <p id="facility-photo-description">{photo.description}</p>
+                        </div>
+                        <div className={styles.controls}>
+                            <button type="button" disabled={photoIndex === 0} onClick={() => changePhoto(-1)} aria-label="Previous photo" className={styles.photoNav}><ArrowLeft size={20} aria-hidden="true" /></button>
+                            <button type="button" disabled={photoIndex === FACILITIES.length - 1} onClick={() => changePhoto(1)} aria-label="Next photo" className={styles.photoNav}><ArrowRight size={20} aria-hidden="true" /></button>
+                        </div>
+                    </div>
+                </div>}
+            </dialog>
+        </section>
+    );
 }

@@ -26,8 +26,8 @@ export function Solutions() {
                     event.preventDefault();
                     toggleCard(event.currentTarget);
                 }
-            }} className="stakeholder-card scroll-mt-28 relative h-[260px] cursor-pointer overflow-hidden rounded-2xl p-[2px] text-left transition-all duration-500 hover:-translate-y-2 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-red)] focus-visible:ring-offset-4 sm:h-[280px] reveal group" style={{ transitionDelay: `${i * 100}ms` }}>
-              <div className={`${card.bg} stakeholder-card__content relative z-[1] flex h-full flex-col overflow-hidden rounded-[14px] p-6 pb-0`}>
+            }} className="landing-card stakeholder-card scroll-mt-28 relative h-[260px] cursor-pointer overflow-hidden text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-red)] focus-visible:ring-offset-4 sm:h-[280px] reveal group" style={{ "--reveal-delay": `${i * 30}ms` }}>
+              <div className="stakeholder-card__content relative z-[1] flex h-full flex-col overflow-hidden p-5 pb-0">
                 <div className="flex items-center gap-2">
                   <DynamicIcon name={card.icon} className="w-5 h-5 text-gray-800 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"/>
                   <h3 className="text-[17px] font-bold text-gray-900">{card.title}</h3>
@@ -41,7 +41,7 @@ export function Solutions() {
                 <span className="mt-3 inline-flex items-center gap-1 text-[13px] font-semibold text-[color:var(--brand-red)]">
                   Know More <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"/>
                 </span>
-                <Image src={card.image} alt="" width={220} height={220} className="pointer-events-none absolute bottom-0 right-0 h-[55%] w-auto object-contain object-bottom transition-transform duration-500 group-hover:scale-105 animate-float"/>
+                <Image src={card.image} alt="" width={220} height={220} className="pointer-events-none absolute bottom-0 right-0 h-[55%] w-auto object-contain object-bottom transition-transform duration-300 group-hover:scale-105"/>
               </div>
             </article>))}
         </div>

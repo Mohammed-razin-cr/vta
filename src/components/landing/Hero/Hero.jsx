@@ -35,7 +35,7 @@ export function Hero() {
           </p>
 
           <div className="mt-7 flex w-full max-w-[270px] flex-wrap items-center gap-2.5 sm:mt-8 sm:max-w-none">
-            {HERO_ACTIONS.map((action) => (<a key={action.label} href={action.href} className="hero-cta-pill">
+            {HERO_ACTIONS.map((action, index) => (<a key={action.label} href={action.href} className={index === 0 ? "hero-cta-pill" : "hero-cta-pill hero-cta-pill--secondary"}>
                 <span className="hero-cta-pill__label">
                   <svg className="hero-cta-pill__tire" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <circle cx="12" cy="12" r="9"/>
