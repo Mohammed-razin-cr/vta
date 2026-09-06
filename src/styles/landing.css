@@ -929,17 +929,48 @@ button:focus-visible,
   outline-offset: 2px;
   border-radius: 6px;
 }
-/* Shared card styling with a restrained selected state. */
+/* Rotating crimson border feedback for the stakeholder cards. */
 .stakeholder-card {
   isolation: isolate;
+  padding: 2px;
+  border: 0;
+  background: var(--card-border);
+}
+
+.stakeholder-card::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  width: 112px;
+  height: 520px;
+  opacity: 0;
+  background: linear-gradient(180deg, #dc143c 0%, #800020 32%, #ef2f2a 66%, #a00032 100%);
+  transform: translate(-50%, -50%) rotate(0deg);
+  transform-origin: center;
+  animation: stakeholder-border-rotation 3.6s linear infinite;
+  animation-play-state: paused;
+  transition: opacity 300ms ease;
+  will-change: transform;
+}
+
+.stakeholder-card:hover::before,
+.stakeholder-card:focus-visible::before,
+.stakeholder-card.is-active::before {
+  opacity: 1;
+  animation-play-state: running;
+}
+
+.stakeholder-card__content {
+  border-radius: calc(var(--card-radius) - 2px);
   background: #fff;
 }
 
 .stakeholder-card:hover,
 .stakeholder-card:focus-visible,
 .stakeholder-card.is-active {
-  border-color: var(--brand-red);
-  box-shadow: var(--card-shadow-hover);
+  box-shadow: 0 18px 38px -22px rgb(128 0 32 / 72%), 0 0 0 1px rgb(220 20 60 / 14%);
 }
 
 .stakeholder-card__content::before {
@@ -959,11 +990,19 @@ button:focus-visible,
   opacity: 1;
 }
 
+@keyframes stakeholder-border-rotation {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .landing-card, .stakeholder-card__content::before {
     transition: none;
   }
   .landing-card:hover { transform: none; }
+  .stakeholder-card::before {
+    animation: none;
+    transform: translate(-50%, -50%) rotate(35deg);
+  }
 }
 
 /* Editorial media-recognition panel. */
