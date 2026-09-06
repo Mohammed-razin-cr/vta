@@ -39,7 +39,7 @@ export function Footer() {
             </div>
 
             <div className={styles.container}>
-                <div id="about" className={styles.intro}>
+                <div id="about" className={"reveal " + styles.intro}>
                     <div className={styles.logoPlate}>
                         <Image src="/assets/vta-logo.png" alt="VTA Talent Cloud" width={160} height={56} className={styles.logo} />
                     </div>
@@ -52,7 +52,7 @@ export function Footer() {
                     </a>
                 </div>
 
-                <div className={styles.navigationPanel}>
+                <div className={"reveal " + styles.navigationPanel} style={{ "--reveal-delay": "60ms" }}>
                     <div className={styles.navigationGrid}>
                         {FOOTER_COLUMNS.map((column) => (
                             <div key={column.title} className={styles.column}>
