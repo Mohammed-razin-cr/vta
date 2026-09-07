@@ -23,19 +23,6 @@
     radial-gradient(ellipse at 100% 100%, rgb(var(--footer-red-rgb) / 24%), transparent 45%);
 }
 
-.ribbon {
-  position: absolute;
-  top: -58px;
-  width: clamp(200px, 23vw, 360px);
-  height: auto;
-  opacity: .88;
-  animation: ribbonBreathe 8s ease-in-out infinite alternate;
-  transform-origin: center;
-}
-
-.ribbonLeft { left: -58px; }
-.ribbonRight { right: -58px; transform: scaleX(-1); animation-name: ribbonBreatheRight; }
-
 .horizon {
   position: absolute;
   right: -10%;
@@ -162,16 +149,6 @@
   letter-spacing: -.01em;
 }
 
-.footer h2::before {
-  content: "";
-  width: 12px;
-  height: 2px;
-  flex: 0 0 12px;
-  border-radius: 999px;
-  background: var(--footer-red);
-  box-shadow: 0 0 8px rgb(var(--footer-red-rgb) / 55%);
-}
-
 .column ul { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
 
 .column a {
@@ -253,16 +230,6 @@
   .appCard:hover { border-color: rgb(var(--footer-red-rgb) / 52%); background: linear-gradient(140deg, #271719, #130d0e 85%); }
 }
 
-@keyframes ribbonBreathe {
-  from { transform: translate3d(0, 0, 0) scale(1); filter: saturate(.9); }
-  to { transform: translate3d(0, 8px, 0) scale(1.015); filter: saturate(1.1); }
-}
-
-@keyframes ribbonBreatheRight {
-  from { transform: scaleX(-1) translate3d(0, 0, 0) scale(1); filter: saturate(.9); }
-  to { transform: scaleX(-1) translate3d(0, 8px, 0) scale(1.015); filter: saturate(1.1); }
-}
-
 @keyframes lineGlow {
   from { opacity: .55; filter: brightness(.9); }
   to { opacity: 1; filter: brightness(1.25); }
@@ -276,9 +243,6 @@
   .appCard { display: grid; grid-template-columns: 38px minmax(0, 1fr); column-gap: 14px; align-items: center; }
   .appIcon { grid-row: span 2; margin: 0; }
   .appDescription { margin-top: 2px; }
-  .ribbon { width: 245px; opacity: .66; }
-  .ribbonLeft { left: -110px; }
-  .ribbonRight { right: -110px; }
 }
 
 @media (max-width: 700px) {
@@ -288,9 +252,6 @@
   .navigationPanel { padding: 26px 24px 22px; border-radius: 18px; }
   .navigationGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 20px; }
   .footer h2 { margin-bottom: 10px; }
-  .ribbon { top: 10px; width: 190px; opacity: .48; }
-  .ribbonLeft { left: -132px; }
-  .ribbonRight { right: -132px; }
   .bottomBar { margin-top: 20px; padding-block: 18px; }
 }
 
@@ -306,7 +267,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ribbon, .navigationPanel::before { animation: none; }
+  .navigationPanel::before { animation: none; }
   .contactLink, .contactLink svg, .column a, .column a::after, .appCard { transition: none; }
   .contactLink:hover svg, .column a:hover, .column a:hover::after { transform: none; }
 }

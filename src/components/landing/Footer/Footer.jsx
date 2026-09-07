@@ -3,38 +3,11 @@ import { ArrowUpRight, Smartphone } from "lucide-react";
 import { FOOTER_COLUMNS } from "@/lib/constants/landing-data";
 import styles from "./Footer.module.css";
 
-function FooterRibbon({ side }) {
-    const gradientId = "footer-ribbon-" + side;
-    return (
-        <svg className={styles.ribbon + " " + (side === "right" ? styles.ribbonRight : styles.ribbonLeft)} viewBox="0 0 320 620" fill="none" aria-hidden="true" focusable="false">
-            <defs>
-                <linearGradient id={gradientId} x1="14" y1="60" x2="245" y2="366" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#170304" />
-                    <stop offset=".5" stopColor="#830f14" />
-                    <stop offset=".78" stopColor="var(--footer-red)" />
-                    <stop offset="1" stopColor="#340608" />
-                </linearGradient>
-                <linearGradient id={gradientId + "-fold"} x1="6" y1="454" x2="263" y2="168" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#170304" />
-                    <stop offset=".52" stopColor="#a31319" />
-                    <stop offset="1" stopColor="var(--footer-red)" />
-                </linearGradient>
-            </defs>
-            <path d="M-81-86 210 196Q234 220 210 246L-58 516-147 418 102 171-126-49Z" fill={"url(#" + gradientId + ")"} />
-            <path d="m-38 163 262 249q26 25 0 51L-23 708-128 603 116 363-128 121Z" fill={"url(#" + gradientId + "-fold)"} opacity=".74" />
-            <path d="M-32-22 255 251M-37 151 282 453M-30 577 215 332" stroke="var(--footer-red)" strokeOpacity=".26" />
-            <path d="m-30-42 288 274M-21 613 265 329" stroke="var(--footer-red)" strokeOpacity=".12" />
-        </svg>
-    );
-}
-
 export function Footer() {
     const year = new Date().getFullYear();
     return (
         <footer id="site-footer" className={styles.footer}>
             <div className={styles.atmosphere} aria-hidden="true">
-                <FooterRibbon side="left" />
-                <FooterRibbon side="right" />
                 <div className={styles.horizon} />
             </div>
 

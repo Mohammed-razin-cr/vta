@@ -214,17 +214,6 @@ export function Facilities() {
                 </div>
 
                 <div className={styles.footer}>
-                    <div className={styles.status}>
-                        <span className={styles.count} aria-live="polite" aria-atomic="true">
-                            <span className="sr-only">Showing training spaces </span>
-                            <strong>{formatNumber(view.first + 1)}{view.last > view.first && "–" + formatNumber(view.last + 1)}</strong>
-                            <span> / 05</span>
-                        </span>
-                        <span className={styles.browseHint}>Explore every space</span>
-                    </div>
-                    <div className={styles.progress} aria-hidden="true">
-                        <span style={{ transform: "scaleX(" + (view.last + 1) / FACILITIES.length + ")" }} />
-                    </div>
                     <div className={styles.controls}>
                         <button type="button" onClick={() => navigate("previous")} disabled={!view.canPrevious} aria-label="Previous facility" aria-controls="facilities-gallery" className={styles.previous}>
                             <ArrowLeft size={18} aria-hidden="true" />

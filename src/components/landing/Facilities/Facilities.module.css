@@ -140,33 +140,11 @@
 .footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 16px;
   margin-top: 8px;
   padding-top: 20px;
   border-top: 1px solid var(--gallery-line);
-}
-
-.status { flex-shrink: 0; }
-.count { color: var(--gallery-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
-.count strong { color: var(--gallery-ink); font-weight: 700; }
-.browseHint { display: none; margin-left: 16px; color: var(--gallery-muted); font-size: 12px; }
-
-.progress {
-  display: none;
-  height: 2px;
-  flex: 1;
-  overflow: hidden;
-  background: var(--gallery-line);
-}
-
-.progress > span {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: var(--brand-red);
-  transform-origin: left;
-  transition: transform 250ms ease;
 }
 
 .controls { display: flex; flex-shrink: 0; align-items: center; gap: 8px; }
@@ -254,9 +232,6 @@
   .section { padding-block: 64px; }
   .container { padding-inline: 24px; }
   .track { grid-auto-columns: calc((100% - 20px) / 2); gap: 20px; }
-  .browseHint { display: inline; }
-  .progress { display: block; }
-  .footer { gap: 28px; }
 }
 
 @media (min-width: 1024px) {
