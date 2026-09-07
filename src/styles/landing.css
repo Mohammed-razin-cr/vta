@@ -227,12 +227,20 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translateX(calc(-50% - 6px));
   }
 }
 .animate-marquee {
   animation: marquee 35s linear infinite;
   will-change: transform;
+}
+
+.brand-marquee-viewport {
+  scrollbar-width: none;
+}
+
+.brand-marquee-viewport::-webkit-scrollbar {
+  display: none;
 }
 
 .facilities-track {
@@ -921,6 +929,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .brand-marquee-viewport {
+    overflow-x: auto;
+  }
+
   .animate-marquee,
   .animate-float,
   .animate-arrow-slide,

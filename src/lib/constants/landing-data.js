@@ -24,7 +24,11 @@ export const BRANDS = [
     {
         name: "VEEDOL",
         logo: "/assets/brands/veedol.png",
-        logoClassName: "origin-left scale-[2.5] group-hover:scale-[2.6]",
+        cropClassName: "max-w-[103px]",
+        cropStyle: {
+            backgroundPosition: "-22px center",
+            backgroundSize: "auto 36px",
+        },
     },
     { name: "SKILL INDIA", logo: "/assets/brands/skill-india.png" },
     { name: "NSDC", logo: "/assets/brands/nsdc.svg" },
