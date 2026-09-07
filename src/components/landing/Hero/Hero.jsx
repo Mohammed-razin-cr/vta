@@ -11,14 +11,14 @@ const HERO_ACTIONS = [
 export function Hero() {
     return (<section className="relative overflow-hidden bg-gradient-to-br from-[#FEF5F4] via-white to-[#FEF5F4]">
       <Image src="/assets/hero-bg-clean.png" alt="" fill priority aria-hidden="true" className="pointer-events-none absolute inset-0 object-cover object-center"/>
-      <div className="relative mx-auto grid w-full max-w-[1536px] grid-cols-[minmax(0,1fr)] items-center gap-8 px-4 py-10 sm:px-6 sm:py-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,.9fr)] lg:gap-4 lg:py-10 xl:py-12">
+      <div className="hero-layout relative mx-auto grid w-full max-w-[1536px] grid-cols-[minmax(0,1fr)] items-center gap-8 px-4 py-10 sm:px-6 sm:py-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,.9fr)] lg:gap-4 lg:py-10 xl:py-12">
         <div className="min-w-0">
           <div className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-[color:var(--brand-red-soft)] border border-red-100 px-3.5 py-1 sm:px-4 sm:py-1.5 text-[9px] min-[320px]:text-[10px] sm:text-[11px] font-bold tracking-wider text-[color:var(--brand-red)] animate-soft-pulse">
             <span className="w-2 h-2 rounded-full bg-[color:var(--brand-red)]" aria-hidden="true"/>
             AI POWERED WORKFORCE PLATFORM
           </div>
 
-          <h1 className="mt-4 sm:mt-6 text-[37px] sm:text-[49px] lg:text-[61px] leading-[1.08] sm:leading-[1.05] font-black text-gray-900 tracking-tight">
+          <h1 className="hero-title mt-4 sm:mt-6 text-[37px] sm:text-[49px] lg:text-[61px] leading-[1.08] sm:leading-[1.05] font-black text-gray-900 tracking-tight">
             India&apos;s Automotive
             <br />
             <span className="hero-headline-rotator text-[color:var(--brand-red)]" aria-hidden="true">
@@ -29,12 +29,12 @@ export function Hero() {
             <span className="sr-only">Talent Cloud</span>
           </h1>
 
-          <p className="mt-4 sm:mt-6 text-sm sm:text-[15px] leading-relaxed text-gray-700 max-w-xl">
+          <p className="hero-description mt-4 sm:mt-6 text-sm sm:text-[15px] leading-relaxed text-gray-700 max-w-xl">
             Connecting Students, Mechanics, Trainers, Employers, OEMs and CSR Partners on one AI-powered
             platform for Learning, Certification, Hiring and Career Growth.
           </p>
 
-          <div className="mt-7 flex w-full max-w-[270px] flex-wrap items-center gap-2.5 sm:mt-8 sm:max-w-none">
+          <div className="hero-actions mt-7 flex w-full max-w-[270px] flex-wrap items-center gap-2.5 sm:mt-8 sm:max-w-none">
             {HERO_ACTIONS.map((action, index) => (<a key={action.label} href={action.href} className={index === 0 ? "hero-cta-pill" : "hero-cta-pill hero-cta-pill--secondary"}>
                 <span className="hero-cta-pill__label">
                   <svg className="hero-cta-pill__tire" viewBox="0 0 24 24" fill="none" aria-hidden="true">

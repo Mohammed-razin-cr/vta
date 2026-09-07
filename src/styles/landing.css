@@ -377,6 +377,40 @@
   }
 }
 
+/* Laptop browsers often lose 120-180px to tabs, bookmarks and OS scaling.
+   Keep the complete hero visible in these short desktop viewports. */
+@media (min-width: 1024px) and (max-height: 760px) {
+  .hero-layout {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .hero-title {
+    margin-top: 1rem;
+    font-size: 3.25rem;
+  }
+
+  .hero-description {
+    margin-top: 1rem;
+    line-height: 1.55;
+  }
+
+  .hero-actions,
+  .hero-highlights {
+    margin-top: 1.25rem;
+  }
+
+  .hero-highlight-card {
+    min-height: 4.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .talent-tech-stage {
+    --talent-diagram-scale: 0.78;
+  }
+}
+
 .talent-tech-diagram::before {
   content: "";
   position: absolute;
