@@ -13,7 +13,7 @@ const COURSE_LEVELS = [
         duration: "120 hours",
         format: "Workshop-first",
         practice: "Live machines",
-        image: "/assets/bronze-course-workshop.jpg",
+        image: "/assets/bronze-course-workshop.webp",
         imageAlt: "Motorcycle mechanic carrying out hands-on service work inside a real workshop",
         modules: [
             { title: "Tools & Equipment", description: "Identification and safe use of general-purpose workshop tools." },

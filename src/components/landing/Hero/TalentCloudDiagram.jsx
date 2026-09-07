@@ -14,7 +14,7 @@ const ROLE_CARDS = [
         index: "02",
         title: "TRAINERS",
         subtitle: "Teach & Empower",
-        image: "/assets/card-trainer.png",
+        image: "/assets/card-trainer.webp",
         imagePosition: "center bottom",
     },
     {
@@ -22,7 +22,7 @@ const ROLE_CARDS = [
         index: "03",
         title: "EMPLOYERS",
         subtitle: "Hire & Grow",
-        image: "/assets/card-employer.png",
+        image: "/assets/card-employer.webp",
         imagePosition: "center bottom",
     },
     {
@@ -58,7 +58,7 @@ export function TalentCloudDiagram() {
 
         <div className="talent-tech-core" aria-hidden="true">
           <div className="talent-tech-core__halo"/>
-          <Image src="/assets/vta-gear.png" alt="" fill sizes="240px" priority className="talent-tech-core__gear"/>
+          <Image src="/assets/vta-gear.webp" alt="" fill sizes="240px" priority className="talent-tech-core__gear"/>
           <div className="talent-tech-core__center">
             <span>Talent</span>
             <span>Cloud<sup>™</sup></span>

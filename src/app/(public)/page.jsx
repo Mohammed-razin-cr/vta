@@ -55,7 +55,7 @@ const structuredData = {
             url: `${SITE_URL}/`,
             logo: {
                 "@type": "ImageObject",
-                url: `${SITE_URL}/assets/vta-logo.png`,
+                url: `${SITE_URL}/assets/vta-logo.webp`,
             },
             description: SITE_DESCRIPTION,
         },

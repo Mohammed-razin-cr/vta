@@ -14,7 +14,7 @@ export function Footer() {
             <div className={styles.container}>
                 <div id="about" className={"reveal " + styles.intro}>
                     <div className={styles.logoPlate}>
-                        <Image src="/assets/vta-logo.png" alt="VTA Talent Cloud" width={160} height={56} className={styles.logo} />
+                        <Image src="/assets/vta-logo.webp" alt="VTA Talent Cloud" width={160} height={56} className={styles.logo} />
                     </div>
                     <p className={styles.statement}>
                         VTA Talent Cloud™ is India&apos;s AI-Powered Automotive Workforce Platform, connecting talent, industry

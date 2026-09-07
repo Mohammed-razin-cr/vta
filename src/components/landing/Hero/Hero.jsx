@@ -10,7 +10,7 @@ const HERO_ACTIONS = [
 ];
 export function Hero() {
     return (<section className="relative overflow-hidden bg-gradient-to-br from-[#FEF5F4] via-white to-[#FEF5F4]">
-      <Image src="/assets/hero-bg-clean.png" alt="" fill priority aria-hidden="true" className="pointer-events-none absolute inset-0 object-cover object-center"/>
+      <Image src="/assets/hero-bg-clean.webp" alt="" fill priority aria-hidden="true" className="pointer-events-none absolute inset-0 object-cover object-center"/>
       <div className="hero-layout relative mx-auto grid w-full max-w-[1536px] grid-cols-[minmax(0,1fr)] items-center gap-8 px-4 py-10 sm:px-6 sm:py-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,.9fr)] lg:gap-4 lg:py-10 xl:py-12">
         <div className="min-w-0">
           <div className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-[color:var(--brand-red-soft)] border border-red-100 px-3.5 py-1 sm:px-4 sm:py-1.5 text-[9px] min-[320px]:text-[10px] sm:text-[11px] font-bold tracking-wider text-[color:var(--brand-red)] animate-soft-pulse">

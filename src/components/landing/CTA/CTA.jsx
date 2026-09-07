@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 export function CTA() {
     return (<section id="contact" className="relative overflow-hidden bg-[color:var(--brand-red)]">
-      <Image src="/assets/mechanics-hero.png" alt="" fill aria-hidden="true" className="pointer-events-none absolute inset-0 object-cover object-right opacity-40" style={{ mixBlendMode: "multiply" }}/>
+      <Image src="/assets/mechanics-hero.webp" alt="" fill aria-hidden="true" className="pointer-events-none absolute inset-0 object-cover object-right opacity-40" style={{ mixBlendMode: "multiply" }}/>
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[color:var(--brand-red-dark)] via-[color:var(--brand-red)]/90 to-transparent" aria-hidden="true"/>
       <div className="relative mx-auto grid max-w-[1280px] items-center gap-6 px-4 py-12 sm:px-6 sm:py-14 lg:grid-cols-2">
         <div>

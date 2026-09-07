@@ -66,8 +66,8 @@ export const metadata = {
         },
     },
     icons: {
-        icon: "/assets/vta-gear.png",
-        apple: "/assets/vta-gear.png",
+        icon: "/assets/vta-gear.webp",
+        apple: "/assets/vta-gear.webp",
     },
 };
 export default function RootLayout({ children }) {

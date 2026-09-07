@@ -16,25 +16,25 @@ export const HERO_HIGHLIGHTS = [
 ];
 export const BRANDS = [
     { name: "KTM", logo: "/assets/brands/ktm.svg" },
-    { name: "HONDA", logo: "/assets/brands/honda-wing.png" },
+    { name: "HONDA", logo: "/assets/brands/honda-wing.webp" },
     { name: "TVS", logo: "/assets/brands/tvs.svg" },
     { name: "HERO", logo: "/assets/brands/hero-motocorp.svg" },
     { name: "ROYAL ENFIELD", logo: "/assets/brands/royal-enfield.svg" },
     { name: "GULF", logo: "/assets/brands/gulf.svg" },
     {
         name: "VEEDOL",
-        logo: "/assets/brands/veedol.png",
+        logo: "/assets/brands/veedol.webp",
         cropClassName: "max-w-[103px]",
         cropStyle: {
             backgroundPosition: "-22px center",
             backgroundSize: "auto 36px",
         },
     },
-    { name: "SKILL INDIA", logo: "/assets/brands/skill-india.png" },
+    { name: "SKILL INDIA", logo: "/assets/brands/skill-india.webp" },
     { name: "NSDC", logo: "/assets/brands/nsdc.svg" },
     {
         name: "BAJAJ",
-        logo: "/assets/brands/bajaj.png",
+        logo: "/assets/brands/bajaj.webp",
         frameClassName: "h-16 w-16",
     },
 ];
@@ -43,7 +43,7 @@ export const SOLUTIONS = [
         icon: "graduation-cap",
         title: "Candidates",
         bg: "bg-[#FFF3F1]",
-        image: "/assets/card-candidate.png",
+        image: "/assets/card-candidate.webp",
         bullets: [
             "Learn from industry experts",
             "Get certified",
@@ -55,7 +55,7 @@ export const SOLUTIONS = [
         icon: "building-2",
         title: "Employers",
         bg: "bg-[#EEF3FB]",
-        image: "/assets/card-employer.png",
+        image: "/assets/card-employer.webp",
         bullets: [
             "Post jobs easily",
             "Access verified talent",
@@ -67,14 +67,14 @@ export const SOLUTIONS = [
         icon: "book-open",
         title: "Trainers",
         bg: "bg-[#EEF7F0]",
-        image: "/assets/card-trainer.png",
+        image: "/assets/card-trainer.webp",
         bullets: ["Create courses", "Teach & mentor", "Track learners", "Earn and grow"],
     },
     {
         icon: "handshake",
         title: "Partners",
         bg: "bg-[#FFF6E9]",
-        image: "/assets/card-partners.png",
+        image: "/assets/card-partners.webp",
         bullets: [
             "Drive CSR impact",
             "Skill communities",
@@ -88,7 +88,7 @@ export const STEPS = [
         icon: "file-text",
         title: "1. Register",
         desc: "Sign up in minutes and create your profile",
-        image: "/assets/bronze-course-workshop.jpg",
+        image: "/assets/bronze-course-workshop.webp",
         imageAlt: "Indian two-wheeler mechanic servicing a motorcycle inside a local workshop",
     },
     {
@@ -109,21 +109,21 @@ export const STEPS = [
         icon: "badge-check",
         title: "4. Certification",
         desc: "Get industry-recognized digital certificate",
-        image: "/assets/workflow-certification-indian-male.jpg",
+        image: "/assets/workflow-certification-indian-male.webp",
         imageAlt: "Young Indian male graduate holding his diploma after certification",
     },
     {
         icon: "briefcase",
         title: "5. Placement",
         desc: "Connect with employers & get hired",
-        image: "/assets/workflow-placement-indian-male.jpg",
+        image: "/assets/workflow-placement-indian-male.webp",
         imageAlt: "Young Indian male professional using a laptop after securing a placement",
     },
     {
         icon: "trending-up",
         title: "6. Career Growth",
         desc: "Upskill continuously and grow your career",
-        image: "/assets/workflow-career-growth-indian-male.jpg",
+        image: "/assets/workflow-career-growth-indian-male.webp",
         imageAlt: "Confident Indian male professional advancing his career in a modern office",
     },
 ];
@@ -143,19 +143,19 @@ export const STATS = [
 ];
 export const TESTIMONIALS = [
     {
-        avatar: "/assets/avatar-employer.jpg",
+        avatar: "/assets/avatar-employer.webp",
         name: "– Service Manager",
         role: "Honda BigWing",
         quote: "VTA has given us access to skilled technicians that are job-ready from day one.",
     },
     {
-        avatar: "/assets/avatar-learner.jpg",
+        avatar: "/assets/avatar-learner.webp",
         name: "– Venkatesh R",
         role: "VTA Learner",
         quote: "The training content is practical, industry-focused and helped me build my confidence.",
     },
     {
-        avatar: "/assets/avatar-trainer.jpg",
+        avatar: "/assets/avatar-trainer.webp",
         name: "– Arjun M",
         role: "VTA Certified Trainer",
         quote: "The platform is easy to use and helps us track, teach and support learners effectively.",
