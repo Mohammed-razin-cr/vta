@@ -20,13 +20,13 @@ export function Solutions() {
         <h2 className="landing-section-title mx-auto max-w-[1180px] text-balance text-center text-[#151310] reveal">
           One Platform. <span className="text-[color:var(--brand-red)]">Four Stakeholders.</span> Infinite Opportunities.
         </h2>
-        <div className="mt-8 grid grid-cols-1 gap-5 sm:mt-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-1 gap-5 sm:mt-10 sm:grid-cols-2 min-[1160px]:grid-cols-4">
           {SOLUTIONS.map((card, i) => (<article key={card.title} id={card.title.toLowerCase()} role="button" tabIndex={0} aria-pressed="false" aria-label={`Explore ${card.title}`} onClick={(event) => toggleCard(event.currentTarget)} onKeyDown={(event) => {
                 if (event.key === "Enter" || event.key === " ") {
                     event.preventDefault();
                     toggleCard(event.currentTarget);
                 }
-            }} className="landing-card stakeholder-card scroll-mt-28 relative h-[260px] cursor-pointer overflow-hidden text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-red)] focus-visible:ring-offset-4 sm:h-[280px] reveal group" style={{ "--reveal-delay": `${i * 30}ms` }}>
+            }} className="landing-card stakeholder-card scroll-mt-28 relative h-[320px] cursor-pointer overflow-hidden text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand-red)] focus-visible:ring-offset-4 min-[1160px]:h-[280px] reveal group" style={{ "--reveal-delay": `${i * 30}ms` }}>
               <div className="stakeholder-card__content relative z-[1] flex h-full flex-col overflow-hidden p-5 pb-0">
                 <div className="flex items-center gap-2">
                   <DynamicIcon name={card.icon} className="w-5 h-5 text-gray-800 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"/>
@@ -41,7 +41,7 @@ export function Solutions() {
                 <span className="mt-3 inline-flex items-center gap-1 text-[13px] font-semibold text-[color:var(--brand-red)]">
                   Know More <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"/>
                 </span>
-                <Image src={card.image} alt="" width={220} height={220} className="pointer-events-none absolute bottom-0 right-0 h-[55%] w-auto object-contain object-bottom transition-transform duration-300 group-hover:scale-105"/>
+                <Image src={card.image} alt="" width={220} height={220} className="pointer-events-none absolute bottom-0 right-0 h-[42%] w-auto object-contain object-bottom transition-transform duration-300 group-hover:scale-105 min-[1160px]:h-[55%]"/>
               </div>
             </article>))}
         </div>

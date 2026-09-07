@@ -26,7 +26,7 @@ const MEDIA_OUTLETS = [
 ];
 
 export function Testimonials() {
-    return (<section id="success-stories" className="bg-[#FEF5F4]">
+    return (<section id="success-stories" className="scroll-mt-28 bg-[#FEF5F4]">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 py-10 sm:py-14 grid lg:grid-cols-[1fr_320px] xl:grid-cols-[1fr_360px] gap-8 lg:gap-10">
         <div>
           <h2 className="landing-section-title mb-6 text-gray-900 reveal">What People Say</h2>

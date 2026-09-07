@@ -14,6 +14,8 @@ export function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [activeNav, setActiveNav] = useState("/");
     const dropdownWrapperRef = useRef(null);
+    const loginButtonRef = useRef(null);
+    const registerButtonRef = useRef(null);
     const mobileTriggerRef = useRef(null);
     const mobilePanelRef = useRef(null);
     const mobileCloseRef = useRef(null);
@@ -27,6 +29,20 @@ export function Navbar() {
         document.addEventListener("click", handleClickOutside);
         return () => document.removeEventListener("click", handleClickOutside);
     }, []);
+    useEffect(() => {
+        if (!openDropdown)
+            return;
+        const handleKeyDown = (event) => {
+            if (event.key !== "Escape")
+                return;
+            event.preventDefault();
+            setOpenDropdown(null);
+            const trigger = openDropdown === "login" ? loginButtonRef.current : registerButtonRef.current;
+            trigger?.focus();
+        };
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    }, [openDropdown]);
     useEffect(() => {
         const sections = [
             ["solutions", "#solutions"],
@@ -148,7 +164,7 @@ export function Navbar() {
                 </defs>
               </svg>
               <div className="relative">
-                <button type="button" onClick={() => toggleDropdown("login")} aria-expanded={openDropdown === "login"} aria-haspopup="true" className="nav-auth-goo nav-auth-goo--login inline-flex items-center gap-1.5 rounded-md border border-gray-300 bg-white px-3 py-2 text-[13px] font-medium text-gray-800">
+                <button ref={loginButtonRef} type="button" onClick={() => toggleDropdown("login")} aria-expanded={openDropdown === "login"} aria-haspopup="menu" className="nav-auth-goo nav-auth-goo--login inline-flex items-center gap-1.5 rounded-md border border-gray-300 bg-white px-3 py-2 text-[13px] font-medium text-gray-800">
                   <span className="nav-auth-goo__content">
                     <UserRound className="h-4 w-4" aria-hidden="true"/> Login
                   </span>
@@ -158,18 +174,18 @@ export function Navbar() {
                     <span />
                   </span>
                 </button>
-                {openDropdown === "login" && (<div className="absolute right-0 mt-2 w-48 rounded-md border border-gray-200 bg-white shadow-lg py-1 z-50">
-                    <Link href="/login" className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                {openDropdown === "login" && (<div role="menu" className="absolute right-0 mt-2 w-48 rounded-md border border-gray-200 bg-white shadow-lg py-1 z-50">
+                    <Link href="/login" prefetch={false} role="menuitem" className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">
                       Employee Login
                     </Link>
-                    <Link href="/employer/login" className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                    <Link href="/employer/login" prefetch={false} role="menuitem" className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">
                       Employer Login
                     </Link>
                   </div>)}
               </div>
 
               <div className="relative">
-                <button type="button" onClick={() => toggleDropdown("register")} aria-expanded={openDropdown === "register"} aria-haspopup="true" className="nav-auth-goo nav-auth-goo--register inline-flex items-center gap-1.5 rounded-md bg-[color:var(--brand-red)] px-3 py-2 text-[13px] font-medium text-white">
+                <button ref={registerButtonRef} type="button" onClick={() => toggleDropdown("register")} aria-expanded={openDropdown === "register"} aria-haspopup="menu" className="nav-auth-goo nav-auth-goo--register inline-flex items-center gap-1.5 rounded-md bg-[color:var(--brand-red)] px-3 py-2 text-[13px] font-medium text-white">
                   <span className="nav-auth-goo__content">
                     <LogIn className="h-4 w-4" aria-hidden="true"/> Register
                   </span>
@@ -179,11 +195,11 @@ export function Navbar() {
                     <span />
                   </span>
                 </button>
-                {openDropdown === "register" && (<div className="absolute right-0 mt-2 w-48 rounded-md border border-gray-200 bg-white shadow-lg py-1 z-50">
-                    <Link href="/register" className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                {openDropdown === "register" && (<div role="menu" className="absolute right-0 mt-2 w-48 rounded-md border border-gray-200 bg-white shadow-lg py-1 z-50">
+                    <Link href="/register" prefetch={false} role="menuitem" className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">
                       Employee Register
                     </Link>
-                    <Link href="/employer/register" className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                    <Link href="/employer/register" prefetch={false} role="menuitem" className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">
                       Employer Register
                     </Link>
                   </div>)}
@@ -213,24 +229,6 @@ export function Navbar() {
           {NAV_LINKS.map((link) => (<a key={link.href} href={link.href} onClick={() => { setActiveNav(link.href); closeMobile(); }} aria-current={activeNav === link.href ? "location" : undefined} className={cn("rounded-md border-l-2 px-3 py-3.5 text-gray-800 transition-colors", activeNav === link.href ? "border-[color:var(--brand-red)] bg-red-50 text-[color:var(--brand-red)]" : "border-transparent hover:bg-gray-50 hover:text-[color:var(--brand-red)]")}>
               {link.label}
             </a>))}
-          <div className="mt-3 border-t border-gray-100 pt-3">
-            <p className="px-3 text-xs font-semibold uppercase tracking-wide text-gray-400">Login</p>
-            <Link href="/login" onClick={closeMobile} className="block rounded-md px-3 py-2.5 text-sm font-medium text-gray-800 hover:bg-gray-50 hover:text-[color:var(--brand-red)]">
-              Employee Login
-            </Link>
-            <Link href="/employer/login" onClick={closeMobile} className="block rounded-md px-3 py-2.5 text-sm font-medium text-gray-800 hover:bg-gray-50 hover:text-[color:var(--brand-red)]">
-              Employer Login
-            </Link>
-          </div>
-          <div className="mt-1">
-            <p className="px-3 text-xs font-semibold uppercase tracking-wide text-gray-400">Register</p>
-            <Link href="/register" onClick={closeMobile} className="block rounded-md px-3 py-2.5 text-sm font-medium text-gray-800 hover:bg-gray-50 hover:text-[color:var(--brand-red)]">
-              Employee Register
-            </Link>
-            <Link href="/employer/register" onClick={closeMobile} className="block rounded-md px-3 py-2.5 text-sm font-medium text-gray-800 hover:bg-gray-50 hover:text-[color:var(--brand-red)]">
-              Employer Register
-            </Link>
-          </div>
         </nav>
       </aside>
     </>);

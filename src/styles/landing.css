@@ -308,6 +308,13 @@
   height: calc(540px * var(--talent-diagram-scale));
 }
 
+/* Keep the 540px diagram inside the narrowest supported content column. */
+@media (max-width: 319px) {
+  .talent-tech-stage {
+    --talent-diagram-scale: 0.44;
+  }
+}
+
 .talent-tech-diagram {
   width: 540px;
   height: 540px;
@@ -637,6 +644,14 @@
   overflow: hidden;
   vertical-align: bottom;
   white-space: nowrap;
+}
+
+/* The longest phrase defines the grid width, so scale this line fluidly until it fits. */
+@media (max-width: 359px) {
+  .hero-headline-rotator {
+    max-width: 100%;
+    font-size: clamp(1.875rem, 10.8vw, 2.3125rem);
+  }
 }
 
 .hero-headline-rotator > span {
