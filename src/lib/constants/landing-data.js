@@ -28,7 +28,11 @@ export const BRANDS = [
     },
     { name: "SKILL INDIA", logo: "/assets/brands/skill-india.png" },
     { name: "NSDC", logo: "/assets/brands/nsdc.svg" },
-    { name: "BAJAJ", logo: "/assets/brands/bajaj-auto.svg" },
+    {
+        name: "BAJAJ",
+        logo: "/assets/brands/bajaj.png",
+        frameClassName: "h-16 w-16",
+    },
 ];
 export const SOLUTIONS = [
     {
